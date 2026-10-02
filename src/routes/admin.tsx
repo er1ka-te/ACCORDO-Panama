@@ -49,7 +49,7 @@ function Admin() {
               tipo: familia,
               modalidad,
               precio: Number(precio) || 0,
-              unidad: modalidad === "Alquiler" ? "por mes" : undefined,
+              ...(modalidad === "Alquiler" ? { unidad: "por mes" } : {}),
               estado,
               imagen: IMAGENES[familia],
               descripcion: "Producto agregado desde el panel de administración.",

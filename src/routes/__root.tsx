@@ -11,6 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { AmbientPlayer } from "@/components/AmbientPlayer";
+import { SonoraAssistant } from "@/components/SonoraAssistant";
 
 function NotFoundComponent() {
   return (
@@ -34,12 +38,13 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
-  console.error(error);
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
+  const err = error instanceof Error ? error : new Error(String(error));
+  console.error(err);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
+    reportLovableError(err, { boundary: "tanstack_root_error_component" });
+  }, [err]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -119,8 +124,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="flex min-h-screen flex-col">
+        <SiteHeader />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <SiteFooter />
+        <AmbientPlayer />
+        <SonoraAssistant />
+      </div>
     </QueryClientProvider>
   );
 }
