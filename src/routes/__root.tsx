@@ -11,6 +11,10 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { AmbientPlayer } from "@/components/AmbientPlayer";
+import { SonoraAssistant } from "@/components/SonoraAssistant";
 
 function NotFoundComponent() {
   return (
