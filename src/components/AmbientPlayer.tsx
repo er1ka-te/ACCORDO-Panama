@@ -11,6 +11,8 @@ export function AmbientPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const synthRef = useRef<{ ctx: AudioContext; gain: GainNode } | null>(null);
   const [playing, setPlaying] = useState(false);
+  const [trackIndex, setTrackIndex] = useState(0);
+  const track = SITE.tracks[trackIndex] ?? SITE.tracks[0];
 
   useEffect(() => {
     return () => {
@@ -61,14 +63,23 @@ export function AmbientPlayer() {
     setPlaying(true);
   };
 
+  const changeTrack = async (nextIndex: number) => {
+    const wasPlaying = playing;
+    audioRef.current?.pause();
+    setTrackIndex(nextIndex);
+    if (wasPlaying) {
+      window.setTimeout(() => void audioRef.current?.play().catch(startSynth), 0);
+    }
+  };
+
   return (
-    <div className="fixed bottom-6 left-6 z-40">
-      <audio ref={audioRef} src={SITE.ambientTrack} loop preload="none" />
+    <div className="fixed bottom-3 left-3 z-40 flex max-w-[calc(100vw-6rem)] items-center gap-2 sm:bottom-6 sm:left-6">
+      <audio ref={audioRef} src={track.src} loop preload="none" />
       <button
         type="button"
         onClick={toggle}
         aria-label={playing ? "Pausar música de fondo" : "Reproducir música de fondo"}
-        className={`group flex items-center gap-3 rounded-full border border-gold/40 bg-card/90 py-2 pl-2 pr-4 shadow-[var(--shadow-soft)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-gold)] ${playing ? "pulse-gold" : ""}`}
+        className={`group flex shrink-0 items-center gap-3 rounded-full border border-gold/40 bg-card/90 p-2 shadow-[var(--shadow-soft)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-gold)] ${playing ? "pulse-gold" : ""}`}
       >
         <span className="grid h-9 w-9 place-items-center rounded-full" style={{ background: "var(--gradient-gold)" }}>
           {playing ? (
@@ -76,14 +87,6 @@ export function AmbientPlayer() {
           ) : (
             <Play className="h-4 w-4 text-coffee" />
           )}
-        </span>
-        <span className="hidden text-left sm:block">
-          <span className="block text-[0.7rem] font-bold uppercase tracking-widest text-gold-deep">
-            Ambiente
-          </span>
-          <span className="block text-xs text-muted-foreground">
-            {playing ? "Sonando suave" : "Música instrumental"}
-          </span>
         </span>
         {playing && (
           <span className="flex h-4 items-end gap-0.5">
@@ -97,6 +100,20 @@ export function AmbientPlayer() {
           </span>
         )}
       </button>
+      <label className="sr-only" htmlFor="ambient-track">Elegir melodía</label>
+      <select
+        id="ambient-track"
+        value={trackIndex}
+        onChange={(event) => void changeTrack(Number(event.target.value))}
+        className="min-w-0 max-w-[13rem] rounded-md border border-gold/40 bg-card/95 px-2 py-2 text-xs font-semibold text-foreground shadow-[var(--shadow-soft)] backdrop-blur sm:max-w-none"
+        aria-label="Elegir melodía instrumental"
+      >
+        {SITE.tracks.map((item, index) => (
+          <option key={item.title} value={index}>
+            {index + 1}. {item.title} ({item.mood})
+          </option>
+        ))}
+      </select>
     </div>
   );
 }
