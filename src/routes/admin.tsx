@@ -7,19 +7,19 @@ import { SOLICITUDES, useCatalogo } from "@/lib/store";
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "Panel de administración — Sonora Panamá" },
+      { title: "Panel de administración — ACCORDO Panamá" },
       {
         name: "description",
         content: "Panel simulado para agregar productos, ajustar precios y revisar solicitudes de alquiler.",
       },
-      { property: "og:title", content: "Panel de administración — Sonora Panamá" },
+      { property: "og:title", content: "Panel de administración — ACCORDO Panamá" },
       { property: "og:description", content: "Gestión de catálogo y solicitudes de alquiler." },
     ],
   }),
   component: Admin,
 });
 
-const FAMILIAS: Familia[] = ["Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras"];
+const FAMILIAS: Familia[] = ["Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras", "Accesorios"];
 const MODALIDADES: Modalidad[] = ["Venta", "Alquiler", "Donación"];
 
 function Admin() {

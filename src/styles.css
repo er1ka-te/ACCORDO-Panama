@@ -6,7 +6,7 @@
 
 /*
  * ============================================================
- *  SONORA PANAMÁ — SISTEMA DE DISEÑO
+ *  ACCORDO PANAMÁ — SISTEMA DE DISEÑO
  *  Cambia colores, fuentes y tamaños SOLO aquí.
  * ============================================================
  */
@@ -298,4 +298,23 @@
 @utility eq-bar {
   transform-origin: bottom;
   animation: sonora-bar 900ms ease-in-out infinite;
+}
+
+@keyframes note-float {
+  from { opacity: 0.9; transform: translate(-50%, -50%) scale(0.7); }
+  to { opacity: 0; transform: translate(-50%, -180%) scale(1.3) rotate(20deg); }
+}
+
+.music-note-trail {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  color: var(--gold);
+  font-size: 1.2rem;
+  text-shadow: 0 1px 8px var(--gold-deep);
+  animation: note-float 1s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .music-note-trail { display: none; }
 }

@@ -5,13 +5,13 @@ import { ClipboardCheck, Warehouse, Handshake, BadgeDollarSign } from "lucide-re
 export const Route = createFileRoute("/publicar")({
   head: () => ({
     meta: [
-      { title: "Publica tu instrumento o libro — Sonora Panamá" },
+      { title: "Publica tu instrumento o libro — ACCORDO Panamá" },
       {
         name: "description",
         content:
           "Registra tu instrumento, libro o partitura para venta o alquiler: verificación técnica, recepción en bodega y logística transparente.",
       },
-      { property: "og:title", content: "Publica tu instrumento — Sonora Panamá" },
+      { property: "og:title", content: "Publica tu instrumento — ACCORDO Panamá" },
       {
         property: "og:description",
         content: "Proceso claro de verificación, bodega y entrega para propietarios en Panamá.",

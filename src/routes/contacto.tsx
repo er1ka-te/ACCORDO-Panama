@@ -7,13 +7,13 @@ import { FAQS } from "@/lib/data";
 export const Route = createFileRoute("/contacto")({
   head: () => ({
     meta: [
-      { title: "Contacto y preguntas frecuentes — Sonora Panamá" },
+      { title: "Contacto y preguntas frecuentes — ACCORDO Panamá" },
       {
         name: "description",
         content:
           "Escríbenos para alquileres, compras, donaciones o alianzas con escuelas de música en Panamá. Preguntas frecuentes incluidas.",
       },
-      { property: "og:title", content: "Contacto — Sonora Panamá" },
+      { property: "og:title", content: "Contacto — ACCORDO Panamá" },
       { property: "og:description", content: "Estamos para ayudarte con tu instrumento o tus clases." },
     ],
   }),
@@ -62,6 +62,9 @@ function Contacto() {
           <div className="grid gap-3 rounded-xl border border-border bg-card p-6 text-sm">
             <p className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-gold-deep" /> {SITE.email}
+            </p>
+            <p className="flex items-center gap-2">
+              <Mail className="h-4 w-4 text-gold-deep" /> {SITE.supportEmail}
             </p>
             <p className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-gold-deep" /> {SITE.phone}
