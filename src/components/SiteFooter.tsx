@@ -11,6 +11,8 @@ export function SiteFooter() {
         <div>
           <Logo inverted />
           <p className="mt-4 max-w-xs text-sm text-cream/70">{SITE.claim}</p>
+          <a href={`mailto:${SITE.email}`} className="mt-3 block text-sm text-gold hover:underline">{SITE.email}</a>
+          <a href={`mailto:${SITE.supportEmail}`} className="mt-1 block text-sm text-cream/70 hover:underline">{SITE.supportEmail}</a>
           <div className="mt-5 flex gap-3">
             {[
               { href: SITE.social.instagram, Icon: Instagram, label: "Instagram" },

@@ -5,8 +5,8 @@ import { PRODUCTOS_SEED, type Producto } from "./data";
  * Catálogo compartido (simulado en el navegador con localStorage).
  * El panel de administración escribe aquí y el catálogo lo refleja.
  */
-const KEY = "sonora.catalogo.v1";
-const EVENT = "sonora:catalogo";
+const KEY = "accordo.catalogo.v2";
+const EVENT = "accordo:catalogo";
 
 let cache: Producto[] | null = null;
 

@@ -1,19 +1,20 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { X } from "lucide-react";
+import { FileText, X } from "lucide-react";
 import { RANGOS, formatPrecio, type Producto } from "@/lib/data";
 import { useCatalogo } from "@/lib/store";
+import { SITE } from "@/lib/site";
 
 export const Route = createFileRoute("/catalogo")({
   head: () => ({
     meta: [
-      { title: "Catálogo de instrumentos y partituras — Sonora Panamá" },
+      { title: "Catálogo de instrumentos y partituras — ACCORDO Panamá" },
       {
         name: "description",
         content:
           "Filtra instrumentos de cuerda, viento y percusión, libros y partituras por modalidad de venta o alquiler y por rango de precio.",
       },
-      { property: "og:title", content: "Catálogo — Sonora Panamá" },
+      { property: "og:title", content: "Catálogo — ACCORDO Panamá" },
       {
         property: "og:description",
         content: "Instrumentos y partituras en venta, alquiler y donación en Panamá.",
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/catalogo")({
   component: Catalogo,
 });
 
-const FAMILIAS = ["Todos", "Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras"] as const;
+const FAMILIAS = ["Todos", "Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras", "Accesorios"] as const;
 const MODALIDADES = ["Todas", "Venta", "Alquiler", "Donación"] as const;
 const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 
@@ -34,6 +35,13 @@ function Catalogo() {
   const [formato, setFormato] = useState<(typeof FORMATOS)[number]>("Todos");
   const [rango, setRango] = useState<string>("todos");
   const [detalle, setDetalle] = useState<Producto | null>(null);
+  const [opcion, setOpcion] = useState("");
+  const [pdfAbierto, setPdfAbierto] = useState(false);
+  const abrirDetalle = (producto: Producto) => {
+    setDetalle(producto);
+    setOpcion("");
+    setPdfAbierto(false);
+  };
 
   const lista = useMemo(() => {
     const r = RANGOS.find((x) => x.id === rango) ?? RANGOS[0];
@@ -120,7 +128,7 @@ function Catalogo() {
               <p className="mt-1 text-xs text-muted-foreground">Estado: {p.estado}</p>
               <div className="mt-4 flex items-center justify-between gap-3">
                 <span className="font-display text-2xl text-gold-deep">{formatPrecio(p)}</span>
-                <button type="button" className="btn-coffee px-4 py-2 text-xs" onClick={() => setDetalle(p)}>
+                <button type="button" className="btn-coffee px-4 py-2 text-xs" onClick={() => abrirDetalle(p)}>
                   Ver detalles
                 </button>
               </div>
@@ -142,7 +150,10 @@ function Catalogo() {
           onClick={() => setDetalle(null)}
         >
           <div
-            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-gold/30 bg-card"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Detalles de ${detalle.titulo}`}
+            className="relative max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl border border-gold/30 bg-card"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -168,9 +179,25 @@ function Catalogo() {
                   <dd className="font-semibold">{detalle.estado}</dd>
                 </div>
               </dl>
-              <a href={`mailto:hola@sonorapanama.com?subject=${encodeURIComponent(detalle.titulo)}`} className="btn-gold mt-6 w-full">
-                Solicitar este producto
-              </a>
+              <label className="mt-4 grid gap-1.5 text-sm font-semibold">
+                {detalle.selectorLabel ?? "Presentación"} <span className="text-destructive">*</span>
+                <select required value={opcion} onChange={(e) => setOpcion(e.target.value)} className="field">
+                  <option value="">Selecciona una opción</option>
+                  {(detalle.opciones ?? ["Standard"]).map((item) => <option key={item} value={item}>{item}</option>)}
+                </select>
+              </label>
+              {detalle.pdfPreview && (
+                <div className="mt-4">
+                  <button type="button" onClick={() => setPdfAbierto(true)} className="btn-outline-gold w-full">
+                    <FileText className="h-4 w-4" /> Vista previa PDF
+                  </button>
+                  {pdfAbierto && <p role="status" className="mt-2 rounded-md bg-secondary p-3 text-sm">Vista previa demostrativa de {detalle.titulo}. El archivo completo se entregará únicamente con autorización de derechos.</p>}
+                </div>
+              )}
+              <form action={`mailto:${SITE.email}`} method="get" className="mt-6">
+                <input type="hidden" name="subject" value={`Solicitud: ${detalle.titulo} — ${opcion}`} />
+                <button type="submit" disabled={!opcion} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-50">Solicitar este producto</button>
+              </form>
             </div>
           </div>
         </div>

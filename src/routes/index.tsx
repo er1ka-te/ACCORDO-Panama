@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ShieldCheck, Truck, Wallet, Music4 } from "lucide-react";
 import hero from "@/assets/hero-strings.jpg";
+import orchestraPoster from "@/assets/orquesta-poster.jpg";
 import catCuerda from "@/assets/cat-cuerda.jpg";
 import catViento from "@/assets/cat-viento.jpg";
 import catPercusion from "@/assets/cat-percusion.jpg";
@@ -10,13 +11,13 @@ import { SITE } from "@/lib/site";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sonora Panamá — Alquiler y venta de instrumentos musicales" },
+      { title: "ACCORDO Panamá — Tu camino musical" },
       {
         name: "description",
         content:
           "Alquila, compra o publica instrumentos, libros y partituras en Panamá. Directorio de academias y fundaciones de música.",
       },
-      { property: "og:title", content: "Sonora Panamá — Conectando la música en Panamá" },
+      { property: "og:title", content: "ACCORDO Panamá — Tu camino musical" },
       {
         property: "og:description",
         content: "Instrumentos y partituras accesibles para estudiantes panameños.",
@@ -45,20 +46,25 @@ function Inicio() {
     <>
       {/* HERO */}
       <section className="relative overflow-hidden">
-        <img
-          src={hero}
-          alt="Violines sobre terciopelo café con luz dorada"
-          width={1600}
-          height={1100}
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(105deg, var(--coffee) 18%, color-mix(in oklab, var(--coffee) 55%, transparent) 70%)" }} />
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          poster={orchestraPoster}
+          aria-label="Orquesta tocando en un teatro"
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+        >
+          <source src="/assets/orquesta.mp4" type="video/mp4" />
+        </video>
+        <img src={hero} alt="Instrumentos de cuerda" className="absolute inset-0 h-full w-full object-cover motion-safe:hidden" />
+        <div className="absolute inset-0 bg-coffee/75" />
         <div className="shell relative grid gap-8 py-24 md:py-32">
           <div className="max-w-2xl">
             <p className="eyebrow">{SITE.fullName}</p>
-            <h1 className="mt-4 text-4xl leading-tight text-cream md:text-6xl">
-              {SITE.slogan}
-            </h1>
+            <h1 className="mt-4 text-4xl leading-tight text-cream md:text-6xl">{SITE.name}</h1>
+            <p className="mt-3 font-display text-3xl text-gold md:text-4xl">{SITE.slogan}</p>
             <p className="mt-5 max-w-xl text-base text-cream/80">{SITE.claim}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/catalogo" className="btn-gold">
