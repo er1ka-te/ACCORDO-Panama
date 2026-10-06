@@ -19,6 +19,8 @@ export const Route = createFileRoute("/catalogo")({
         property: "og:description",
         content: "Instrumentos y partituras en venta, alquiler y donación en Panamá.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Catalogo,

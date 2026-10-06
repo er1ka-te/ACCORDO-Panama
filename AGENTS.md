@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the interactive catalogue browser-local and version its storage key whenever the seed schema changes, so stale records cannot break new fields.
