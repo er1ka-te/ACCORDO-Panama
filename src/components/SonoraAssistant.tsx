@@ -108,7 +108,7 @@ export function SonoraAssistant() {
   };
 
   return (
-    <div className="fixed bottom-3 right-3 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-20 right-3 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {open && (
         <section className="flex h-[min(26rem,calc(100dvh-5rem))] w-[min(92vw,22rem)] flex-col overflow-hidden rounded-xl border border-gold/30 bg-card shadow-[var(--shadow-gold)]">
           <header className="surface-coffee flex items-center justify-between px-4 py-3">

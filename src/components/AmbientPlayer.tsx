@@ -73,7 +73,7 @@ export function AmbientPlayer() {
   };
 
   return (
-    <div className="fixed bottom-3 left-3 z-40 flex max-w-[calc(100vw-6rem)] items-center gap-2 sm:bottom-6 sm:left-6">
+    <div className="fixed bottom-3 left-3 z-40 flex max-w-[calc(100vw-1.5rem)] items-center gap-2 sm:bottom-6 sm:left-6">
       <audio ref={audioRef} src={track.src} loop preload="none" />
       <button
         type="button"
