@@ -15,6 +15,8 @@ export const Route = createFileRoute("/contacto")({
       },
       { property: "og:title", content: "Contacto — ACCORDO Panamá" },
       { property: "og:description", content: "Estamos para ayudarte con tu instrumento o tus clases." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Contacto,

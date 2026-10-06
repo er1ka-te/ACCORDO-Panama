@@ -19,6 +19,8 @@ export const Route = createFileRoute("/catalogo")({
         property: "og:description",
         content: "Instrumentos y partituras en venta, alquiler y donación en Panamá.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Catalogo,
@@ -146,7 +148,7 @@ function Catalogo() {
       {/* MODAL DETALLE */}
       {detalle && (
         <div
-          className="fixed inset-0 z-50 grid place-items-center bg-coffee/70 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] grid place-items-center bg-coffee/70 p-4 backdrop-blur-sm"
           onClick={() => setDetalle(null)}
         >
           <div

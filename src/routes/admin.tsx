@@ -14,6 +14,8 @@ export const Route = createFileRoute("/admin")({
       },
       { property: "og:title", content: "Panel de administración — ACCORDO Panamá" },
       { property: "og:description", content: "Gestión de catálogo y solicitudes de alquiler." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Admin,

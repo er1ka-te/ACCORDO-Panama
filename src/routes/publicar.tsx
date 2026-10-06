@@ -16,6 +16,8 @@ export const Route = createFileRoute("/publicar")({
         property: "og:description",
         content: "Proceso claro de verificación, bodega y entrega para propietarios en Panamá.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Publicar,

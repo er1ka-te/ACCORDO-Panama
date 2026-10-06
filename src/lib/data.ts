@@ -26,12 +26,12 @@ export type Producto = {
 
 const PHOTOS = {
   violin: "https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=1200&q=80",
-  viola: "https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=1200&q=80&sat=-15",
-  cello: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?auto=format&fit=crop&w=1200&q=80",
+  viola: "https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?auto=format&fit=crop&w=1200&q=80",
+  cello: "https://images.unsplash.com/photo-1558556405-3071bd8d3ee6?auto=format&fit=crop&w=1200&q=80",
   guitar: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=1200&q=80",
   trumpet: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1200&q=80",
-  sax: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?auto=format&fit=crop&w=1200&q=80&hue=25",
-  flute: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80",
+  sax: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?auto=format&fit=crop&w=1200&q=80&crop=right",
+  flute: "https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=1200&q=80",
   percussion: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?auto=format&fit=crop&w=1200&q=80",
   piano: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?auto=format&fit=crop&w=1200&q=80",
   score: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=1200&q=80",
