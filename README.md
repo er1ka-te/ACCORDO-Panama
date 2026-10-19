@@ -1,14 +1,98 @@
-# Welcome to your Lovable project
+# ACCORDO
+
+Actúa como un desarrollador Web Full Stack y diseñador UX/UI experto. Necesito que generes el código para mi proyecto final de emprendimiento digital llamado "Sonora Panamá" (o un nombre fácil de cambiar mediante variables CSS/JS).
+
+--- OBJETIVO DEL PROYECTO ---
+
+Plataforma web interactiva en Panamá enfocada en facilitar el acceso a la música para niños, jóvenes y estudiantes. Permite el alquiler y venta de instrumentos musicales (cuerda, viento, percusión, etc.) y libros/partituras físicas o digitales a precios accesibles. También incluye un directorio de academias, fundaciones y escuelas de música en Panamá.
+
+--- REQUISITOS DE DISEÑO Y ESTILOS ---
+
+1. Paleta de colores elegante: Tonos marrón café profundo (#2C1D11, #3D2B1F), acentos en dorado elegante (#D4AF37, #C5A059), tonos beige/crema suave (#FDFBF7) para fondos y blanco para contraste.
+
+2. Arquitectura CSS Modular: Usa variables CSS (:root) al inicio del archivo para colores, fuentes, nombres y tamaños, de modo que cambiar el nombre del proyecto, un color o tamaño sea ultra fácil sin romper la estructura.
+
+3. Interactividad y Animaciones:
+
+   - Hover effects suaves (transición de transform scale, sombras doradas, resplandor) en tarjetas, botones y menús.
+
+   - Microinteracciones responsivas al pasar el cursor sobre los productos.
+
+4. Reproductor de Música de Fondo: Un reproductor discreto en una esquina con botón Play/Pause que reproduzca una melodía instrumental suave y relajante (usa una URL de audio instrumental en royalty-free formato MP3).
+
+5. Diseño 100% Responsivo (Mobile First y Desktop).
+
+--- ESTRUCTURA DE LA PÁGINA Y SECCIONES ---
+
+1. LANDING PAGE / INICIO:
+
+   - Header/Navbar con Logo (diseñado con SVG/CSS fácil de modificar), menú de navegación y nombre "Sonora".
+
+   - Hero Section: Título llamativo, slogan ("Conectando la música en Panamá"), botón de llamado a la acción (CTA) "Explorar Catálogo" y "Ofrecer mi Instrumento".
+
+2. CATÁLOGO CON FILTROS AVANZADOS (Instrumentos y Libros/Partituras):
+
+   - Pestañas/Filtros por Categoría: "Instrumentos" (Violas, Violines, Chelos, Guitarras, etc.), "Libros y Partituras" (Físico y Digital).
+
+   - Filtro por Modalidad: "Venta" o "Alquiler".
+
+   - FILTRO POR PRECIO: Botones o selector por rangos exactos:
+
+     * Gratuitos / Donaciones ($0)
+
+     * Económico ($1 - $50)
+
+     * Intermedio ($51 - $100)
+
+     * Todos los precios
+
+   - Tarjetas de producto interactivas con foto, título, precio, badge (Alquiler/Venta), estado del producto y botón "Ver detalles".
+
+3. SECCIÓN DIRECTORIO: "Dónde Aprender en Panamá"
+
+   - Directorio de escuelas, fundaciones y academias de música.
+
+   - Filtro de precio por planes/costos (Gratis/Fundación, $1 - $100).
+
+   - Tarjeta para cada lugar mostrando: Nombre, Ubicación en Panamá, Redes Sociales, Planes/Costos y botón de contacto.
+
+4. SECCIÓN "PONE TU INSTRUMENTO O LIBRO A LA VENTA / ALQUILER":
+
+   - Formulario de contacto explicativo donde los músicos o propietarios pueden registrar su instrumento o libro.
+
+   - Explicación clara y transparente sobre el proceso de verificación, recepción en bodega física de almacenamiento y logística para demostrar transparencia y confianza.
+
+5. ASISTENTE DE IA INTEGRADO (Widget de Chatbot):
+
+   - Un Chatbot flotante ("Asistente Musical Sonora") en la esquina inferior derecha.
+
+   - Funcionalidades interactivas: Responde preguntas frecuentes, recomienda instrumentos o escuelas según el presupuesto del estudiante y explica cómo alquilar o publicar un instrumento.
+
+6. PANEL DE ADMINISTRACIÓN (Simulado/Frontend):
+
+   - Vista sencilla o modal para gestionar/agregar nuevos productos, cambiar precios o revisar solicitudes de alquiler.
+
+7. CONTACTO Y FOOTER:
+
+   - Formulario directo de contacto, redes sociales, preguntas frecuentes (FAQ) y derechos reservados.
+
+--- ESPECIFICACIONES TÉCNICAS DEL CÓDIGO ---
+
+- Código limpio, bien comentado y estructurado (HTML5 semántico, CSS3 moderno con Grid/Flexbox sin romper maquetación, y JavaScript ES6 puro).
+
+- Fácilmente adaptable para despliegue en GitHub Pages / Netlify.
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://accordo-music.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/f3df24c0-cd77-411f-aabe-603d12b67e35).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +104,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
