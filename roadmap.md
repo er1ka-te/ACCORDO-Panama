@@ -5,3 +5,9 @@
 - [x] Completar directorio y filtros con datos verificados
 - [x] Ampliar el asistente musical
 - [x] Verificar diseño responsivo, rutas y errores
+- [ ] Separar componentes y documentar puntos de cambio de imágenes
+- [ ] Añadir cinco anuncios administrables y accesos directos
+- [ ] Incorporar carrito y checkout demostrativo
+- [ ] Implementar donaciones y verificación educativa
+- [ ] Añadir prueba inicial y ruta musical de estudio
+- [ ] Renombrar asistente a Aria y verificar todos los flujos
