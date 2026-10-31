@@ -7,6 +7,8 @@ import catViento from "@/assets/cat-viento.jpg";
 import catPercusion from "@/assets/cat-percusion.jpg";
 import catLibros from "@/assets/cat-libros.jpg";
 import { SITE } from "@/lib/site";
+import { AnnouncementBanner } from "@/components/AnnouncementBanner";
+import { DirectLinks } from "@/components/DirectLinks";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -79,6 +81,9 @@ function Inicio() {
           </div>
         </div>
       </section>
+
+      <AnnouncementBanner />
+      <DirectLinks />
 
       {/* VALORES */}
       <section className="shell grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-4">

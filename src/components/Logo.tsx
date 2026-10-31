@@ -1,10 +1,11 @@
 import { SITE } from "@/lib/site";
+import { LOGO_HEADER_URL } from "@/lib/image-config";
 
 /** Marca editable: clave de Sol entrelazada con el perfil de una viola. */
 export function Logo({ inverted = false }: { inverted?: boolean }) {
   return (
     <span className="flex items-center gap-2.5">
-      <svg
+      {LOGO_HEADER_URL ? <img src={LOGO_HEADER_URL} alt="" className="h-9 w-9 shrink-0 object-contain" /> : <svg
         viewBox="0 0 52 52"
         aria-hidden="true"
         className="h-9 w-9 shrink-0 transition-transform duration-300 hover:rotate-6"
@@ -24,7 +25,7 @@ export function Logo({ inverted = false }: { inverted?: boolean }) {
         />
         <path d="M29 9v37M25 12h8M25 43h8" stroke="var(--gold)" strokeWidth="1.6" strokeLinecap="round" />
         <circle cx="23" cy="29" r="2.2" fill="var(--gold)" />
-      </svg>
+      </svg>}
       <span className="leading-none">
         <span
           className="block font-display text-2xl font-semibold"

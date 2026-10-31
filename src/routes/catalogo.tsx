@@ -3,7 +3,9 @@ import { useMemo, useState } from "react";
 import { FileText, X } from "lucide-react";
 import { RANGOS, formatPrecio, type Producto } from "@/lib/data";
 import { useCatalogo } from "@/lib/store";
-import { SITE } from "@/lib/site";
+import { Link } from "@tanstack/react-router";
+import { useExperience } from "@/lib/experience-store";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/catalogo")({
   head: () => ({
@@ -32,6 +34,8 @@ const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 
 function Catalogo() {
   const { productos } = useCatalogo();
+  const { addToCart } = useExperience();
+  const [agregado, setAgregado] = useState(false);
   const [familia, setFamilia] = useState<(typeof FAMILIAS)[number]>("Todos");
   const [modalidad, setModalidad] = useState<(typeof MODALIDADES)[number]>("Todas");
   const [formato, setFormato] = useState<(typeof FORMATOS)[number]>("Todos");
@@ -43,6 +47,7 @@ function Catalogo() {
     setDetalle(producto);
     setOpcion("");
     setPdfAbierto(false);
+    setAgregado(false);
   };
 
   const lista = useMemo(() => {
@@ -196,10 +201,10 @@ function Catalogo() {
                   {pdfAbierto && <p role="status" className="mt-2 rounded-md bg-secondary p-3 text-sm">Vista previa demostrativa de {detalle.titulo}. El archivo completo se entregará únicamente con autorización de derechos.</p>}
                 </div>
               )}
-              <form action={`mailto:${SITE.email}`} method="get" className="mt-6">
-                <input type="hidden" name="subject" value={`Solicitud: ${detalle.titulo} — ${opcion}`} />
-                <button type="submit" disabled={!opcion} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-50">Solicitar este producto</button>
-              </form>
+              <div className="mt-6 space-y-3">
+                <Button variant="gold" disabled={!opcion || agregado} className="h-auto w-full whitespace-normal" onClick={() => { addToCart({ id: detalle.id, titulo: detalle.titulo, imagen: detalle.imagen, modalidad: detalle.modalidad, precio: detalle.modalidad === "Donación" ? 0 : detalle.precio, opcion }); setAgregado(true); }}>{agregado ? "Añadido al carrito" : detalle.modalidad === "Venta" ? "Comprar · añadir al carrito" : detalle.modalidad === "Alquiler" ? "Alquilar · añadir al carrito" : "Solicitar donación gratuita"}</Button>
+                {agregado && <Button asChild variant="outline" className="w-full"><Link to="/carrito">Ver carrito</Link></Button>}
+              </div>
             </div>
           </div>
         </div>
