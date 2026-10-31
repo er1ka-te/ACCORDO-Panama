@@ -16,6 +16,8 @@ import { Route as CatalogoRouteImport } from './routes/catalogo'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as DirectorioRouteImport } from './routes/directorio'
+import { Route as DonacionesRouteImport } from './routes/donaciones'
+import { Route as EstudioRouteImport } from './routes/estudio'
 import { Route as PublicarRouteImport } from './routes/publicar'
 
 const IndexRoute = IndexRouteImport.update({
@@ -53,6 +55,16 @@ const DirectorioRoute = DirectorioRouteImport.update({
   path: '/directorio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DonacionesRoute = DonacionesRouteImport.update({
+  id: '/donaciones',
+  path: '/donaciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EstudioRoute = EstudioRouteImport.update({
+  id: '/estudio',
+  path: '/estudio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PublicarRoute = PublicarRouteImport.update({
   id: '/publicar',
   path: '/publicar',
@@ -67,6 +79,8 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/directorio': typeof DirectorioRoute
+  '/donaciones': typeof DonacionesRoute
+  '/estudio': typeof EstudioRoute
   '/publicar': typeof PublicarRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +91,8 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/directorio': typeof DirectorioRoute
+  '/donaciones': typeof DonacionesRoute
+  '/estudio': typeof EstudioRoute
   '/publicar': typeof PublicarRoute
 }
 export interface FileRoutesById {
@@ -88,6 +104,8 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/directorio': typeof DirectorioRoute
+  '/donaciones': typeof DonacionesRoute
+  '/estudio': typeof EstudioRoute
   '/publicar': typeof PublicarRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +118,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/directorio'
+    | '/donaciones'
+    | '/estudio'
     | '/publicar'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +130,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/directorio'
+    | '/donaciones'
+    | '/estudio'
     | '/publicar'
   id:
     | '__root__'
@@ -120,6 +142,8 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/directorio'
+    | '/donaciones'
+    | '/estudio'
     | '/publicar'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +155,8 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
   DirectorioRoute: typeof DirectorioRoute
+  DonacionesRoute: typeof DonacionesRoute
+  EstudioRoute: typeof EstudioRoute
   PublicarRoute: typeof PublicarRoute
 }
 
@@ -185,6 +211,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DirectorioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/donaciones': {
+      id: '/donaciones'
+      path: '/donaciones'
+      fullPath: '/donaciones'
+      preLoaderRoute: typeof DonacionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/estudio': {
+      id: '/estudio'
+      path: '/estudio'
+      fullPath: '/estudio'
+      preLoaderRoute: typeof EstudioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/publicar': {
       id: '/publicar'
       path: '/publicar'
@@ -203,6 +243,8 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
   DirectorioRoute: DirectorioRoute,
+  DonacionesRoute: DonacionesRoute,
+  EstudioRoute: EstudioRoute,
   PublicarRoute: PublicarRoute,
 }
 export const routeTree = rootRouteImport
