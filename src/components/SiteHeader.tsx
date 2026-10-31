@@ -1,11 +1,14 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag } from "lucide-react";
+import { useExperience } from "@/lib/experience-store";
+import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { NAV } from "@/lib/site";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const { state } = useExperience();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
@@ -34,14 +37,17 @@ export function SiteHeader() {
           </Link>
         </div>
 
-        <button
+        <div className="flex items-center gap-2">
+        <Button asChild variant="ghost" size="icon"><Link to="/carrito" aria-label={`Carrito, ${state.carrito.length} artículos`} className="relative"><ShoppingBag />{state.carrito.length > 0 && <span className="absolute -right-1 -top-1 rounded-full bg-primary px-1 text-[10px] text-primary-foreground">{state.carrito.length}</span>}</Link></Button>
+        <Button
           type="button"
           aria-label="Abrir menú"
           onClick={() => setOpen((v) => !v)}
           className="chip md:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </button>
+        </Button>
+        </div>
       </div>
 
       {open && (

@@ -16,6 +16,8 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { AmbientPlayer } from "@/components/AmbientPlayer";
 import { SonoraAssistant } from "@/components/SonoraAssistant";
 import { MusicNoteTrail } from "@/components/MusicNoteTrail";
+import { ExperienceProvider } from "@/lib/experience-store";
+import { FAVICON_URL } from "@/lib/image-config";
 
 function NotFoundComponent() {
   return (
@@ -92,7 +94,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: FAVICON_URL },
     ],
   }),
   shellComponent: RootShell,
@@ -120,6 +122,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <ExperienceProvider>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -131,6 +134,7 @@ function RootComponent() {
         <SonoraAssistant />
         <MusicNoteTrail />
       </div>
+      </ExperienceProvider>
     </QueryClientProvider>
   );
 }

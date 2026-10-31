@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Trash2, RotateCcw } from "lucide-react";
 import { IMAGENES, formatPrecio, type Familia, type Modalidad } from "@/lib/data";
 import { SOLICITUDES, useCatalogo } from "@/lib/store";
+import { ExperienceAdmin } from "@/components/ExperienceAdmin";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -141,6 +142,7 @@ function Admin() {
           </section>
         </div>
       </div>
+      <ExperienceAdmin />
     </div>
   );
 }
