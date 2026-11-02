@@ -17,7 +17,7 @@ export function SiteHeader() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {NAV.map((item) => (
             <Link
               key={item.to}
@@ -31,7 +31,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden xl:block">
           <Link to="/catalogo" className="btn-gold">
             Explorar catálogo
           </Link>
@@ -43,7 +43,7 @@ export function SiteHeader() {
           type="button"
           aria-label="Abrir menú"
           onClick={() => setOpen((v) => !v)}
-          className="chip md:hidden"
+          className="chip xl:hidden"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
         </Button>
@@ -51,7 +51,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="shell grid gap-1 border-t border-border/70 py-3 md:hidden">
+        <nav className="shell grid gap-1 border-t border-border/70 py-3 xl:hidden">
           {NAV.map((item) => (
             <Link
               key={item.to}

@@ -27,7 +27,7 @@ export function AnnouncementBanner() {
       <Button asChild variant="gold" className="self-start"><Link to={anuncio.destino}>Ver más</Link></Button>
     </div>
     <div className="shell absolute inset-x-0 bottom-5 flex items-center justify-between gap-3">
-      <div className="flex gap-1">{anuncios.map((a, i) => <Button key={a.id} variant={i === index % anuncios.length ? "gold" : "outline"} size="icon" aria-label={`Anuncio ${i + 1}`} aria-current={i === index % anuncios.length ? "true" : undefined} onClick={() => setIndex(i)}>{i + 1}</Button>)}</div>
+      <div className="flex min-w-0 flex-wrap gap-1">{anuncios.map((a, i) => <Button key={a.id} variant={i === index % anuncios.length ? "gold" : "outline"} size="icon" className="h-8 w-8 text-foreground" aria-label={`Anuncio ${i + 1}`} aria-current={i === index % anuncios.length ? "true" : undefined} onClick={() => setIndex(i)}>{i + 1}</Button>)}</div>
       <div className="flex gap-1"><Button variant="gold" size="icon" aria-label="Anuncio anterior" onClick={() => move(-1)}><ChevronLeft /></Button><Button variant="gold" size="icon" aria-label={paused ? "Reanudar anuncios" : "Pausar anuncios"} onClick={() => setPaused(p => !p)}>{paused ? <Play /> : <Pause />}</Button><Button variant="gold" size="icon" aria-label="Anuncio siguiente" onClick={() => move(1)}><ChevronRight /></Button></div>
     </div>
   </section>;
