@@ -42,7 +42,7 @@ export type CartItem = z.infer<typeof cartItemSchema>;
 export const totalCart = (items: CartItem[]) => items.reduce((sum, i) => sum + (i.modalidad === "Donación" ? 0 : i.precio * i.cantidad), 0);
 export const confirmations = {
   Venta: "Tu compra fue realizada con éxito. Muchas gracias.",
-  Alquiler: "Tu alquiler fue realizado con éxito. Muchas gracias.",
+  Alquiler: "Tu alquiler fue realizada con éxito. Muchas gracias.",
   Donación: "Tu donación fue realizada con éxito. Muchas gracias por apoyar la música de jóvenes estudiantes.",
 };
 export const canOpenModule = (tested: boolean, completed: number, index: number) => tested && index <= completed;
