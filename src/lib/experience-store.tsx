@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { z } from "zod";
-import { ANNOUNCEMENTS, announcementSchema, cartItemSchema, donationSchema, type Announcement, type CartItem, type Donation } from "./experience";
+import { ANNOUNCEMENTS, announcementSchema, cartItemSchema, donationSchema, type CartItem } from "./experience";
 
 const stateSchema = z.object({
   anuncios: z.array(announcementSchema), carrito: z.array(cartItemSchema), donaciones: z.array(donationSchema),

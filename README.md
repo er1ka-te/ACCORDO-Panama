@@ -1,5 +1,31 @@
 # ACCORDO
 
+## Arquitectura React actual
+
+- `src/routes/`: navegación y metadatos. Catálogo y panel renderizan componentes separados.
+- `src/components/`: `SiteHeader`, `Hero`, `AnnouncementBanner`, `DirectLinks`, `Catalog`, `Cart`, `Checkout`, `Donations`, `LearningPath`, `AIChat`, `AdminPanel` y `ExperienceAdmin`.
+- `src/lib/experience-store.tsx`: estado demostrativo validado y versionado del navegador; no es control de acceso ni un servicio de cobros.
+- `src/lib/aria.functions.ts` y `aria.server.ts`: validación y conexión de Aria con Lovable AI. La clave permanece únicamente en el servidor.
+
+### Dónde cambiar imágenes
+
+- Logo: `LOGO_HEADER_URL` en `src/lib/image-config.ts`; vacío conserva el SVG.
+- Favicon: reemplazar `public/favicon.ico` o cambiar `FAVICON_URL` en el mismo archivo.
+- Avatar: `ARIA_AVATAR_URL` en el mismo archivo; vacío conserva el icono.
+- Productos: `PHOTOS` y el campo `imagen` de `PRODUCTOS_SEED` en `src/lib/data.ts`.
+- Accesorios: campo `imagen` de los registros `a1`–`a8` del mismo archivo.
+- Academias, fundaciones y profesores: campo `foto` de `ESCUELAS` en el mismo archivo.
+- Anuncios: `imagen` en `ANNOUNCEMENTS`, o edición desde el panel de anuncios.
+
+### Desarrollo y alcance
+
+Compatible con Node.js y el proyecto React/TanStack existente: `npm install` y `npm run dev`; también se admite Bun. Pruebas: `bunx vitest run src/lib/experience.test.ts`.
+Los pagos, membresías, solicitudes y anuncios son demostrativos y locales; no se cobran tarjetas ni se envían mensajes automáticamente. Los anuncios iniciales son ejemplos, no eventos confirmados. Aria usa Lovable AI y requiere el servicio de servidor; no funciona en alojamiento exclusivamente estático como GitHub Pages.
+
+---
+
+## Brief original (referencia histórica)
+
 Actúa como un desarrollador Web Full Stack y diseñador UX/UI experto. Necesito que generes el código para mi proyecto final de emprendimiento digital llamado "Sonora Panamá" (o un nombre fácil de cambiar mediante variables CSS/JS).
 
 --- OBJETIVO DEL PROYECTO ---
