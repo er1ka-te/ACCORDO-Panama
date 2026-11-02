@@ -14,7 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { AmbientPlayer } from "@/components/AmbientPlayer";
-import { SonoraAssistant } from "@/components/SonoraAssistant";
+import { AIChat } from "@/components/AIChat";
 import { MusicNoteTrail } from "@/components/MusicNoteTrail";
 import { ExperienceProvider } from "@/lib/experience-store";
 import { FAVICON_URL } from "@/lib/image-config";
@@ -131,7 +131,7 @@ function RootComponent() {
         </main>
         <SiteFooter />
         <AmbientPlayer />
-        <SonoraAssistant />
+        <AIChat />
         <MusicNoteTrail />
       </div>
       </ExperienceProvider>

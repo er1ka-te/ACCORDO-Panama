@@ -24,6 +24,8 @@ export type Producto = {
   pdfPreview?: boolean;
 };
 
+// IMÁGENES DE PRODUCTOS: cambia estas URLs; cada producto enlaza su foto mediante `imagen`.
+// ACCESORIOS: cambia `imagen` en los registros a1–a8 de PRODUCTOS_SEED.
 const PHOTOS = {
   violin: "https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=1200&q=80",
   viola: "https://images.unsplash.com/photo-1465821185615-20b3c2fbf41b?auto=format&fit=crop&w=1200&q=80",
@@ -101,6 +103,8 @@ export type Escuela = {
 const mapsSearch = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
 export const ESCUELAS: Escuela[] = [
+  // ACADEMIAS Y FUNDACIONES: añade `foto: "https://..."` a cada entidad para mostrar su imagen.
+  // PROFESORES PRIVADOS: cambia el campo `foto` de los registros p-vla, p-vln, p-cello, etc.
   { id: "e1", nombre: "Red de Orquestas y Coros Juveniles de Panamá", tipo: "Fundación y red oficial", ubicacion: "Antiguo Colegio Abel Bravo, Calle 12 entre Av. Roosevelt y Paseo Gorgas", provincia: "Colón", corregimiento: "Barrio Norte", referencia: "Centro de Arte y Cultura de Colón (CACCO)", planes: "Programa oficial; admisión y cupos según cada módulo", costoMin: 0, costoMax: 0, enfoque: "Orquesta, coros, cuerdas, vientos y formación colectiva", instagram: "https://www.instagram.com/redorquestaspanama/", maps: mapsSearch("Centro de Arte y Cultura de Colón antiguo Colegio Abel Bravo"), contacto: "https://www.instagram.com/redorquestaspanama/" },
   { id: "e2", nombre: "Fundación Danilo Pérez", tipo: "Fundación y red oficial", ubicacion: "Calle 63 A Oeste, casa 12", provincia: "Panamá", corregimiento: "Betania", referencia: "Sede de la Fundación Danilo Pérez", planes: "Talleres, programas sociales y becas; consultar convocatoria", costoMin: 0, costoMax: 0, enfoque: "Jazz, improvisación, ensambles y formación integral", instagram: "https://www.instagram.com/fundaciondaniloperez/", maps: mapsSearch("Fundación Danilo Pérez Calle 63 A Oeste casa 12 Betania"), contacto: "mailto:info@fundaciondaniloperez.org" },
   { id: "e3", nombre: "FUNSINCOPA", tipo: "Fundación y red oficial", ubicacion: "Edificio Galerías Colonial, piso 2, local 26, Boulevard El Dorado y Calle Miguel Brostella", provincia: "Panamá", corregimiento: "Bethania", referencia: "Galerías Colonial, local 26", planes: "Programas de formación orquestal; costos según convocatoria", costoMin: 0, costoMax: 0, enfoque: "Formación sinfónica y música de cámara", instagram: "https://www.instagram.com/funsincopa_oficial/", maps: mapsSearch("FUNSINCOPA Galerías Colonial El Dorado Panamá"), contacto: "https://funsincopa.org/contacto/" },
