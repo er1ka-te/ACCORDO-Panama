@@ -4,7 +4,6 @@ import orchestraPoster from "@/assets/orquesta-poster.jpg";
 import { SITE } from "@/lib/site";
 
 export function Hero() { return (
-{/* HERO */}
       <section className="relative overflow-hidden">
         <video
           autoPlay
