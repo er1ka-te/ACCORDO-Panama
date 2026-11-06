@@ -12,4 +12,6 @@
 - Keep the interactive catalogue browser-local and version its storage key whenever the seed schema changes, so stale records cannot break new fields.
 - Keep route modules focused on metadata and routing; render extracted domain screens from React components to preserve existing markup during refactors.
 - Keep demonstration announcements, donations, orders, cart and learning progress in a validated versioned browser-local provider; this state is not authorization and does not perform real payments or notifications.
+- Keep learning content and progression checks in a browser-safe learning module; persist validated step progress and reset legacy shorter-course progress on migration so levels cannot be skipped.
+- Filter removed products through the shared catalog policy on reads and writes, migrating prior local records without discarding unrelated publications.
 - Keep Aria's AI calls and prompt in server-only helpers behind validated server functions; never send service credentials to the browser.

@@ -1,4 +1,9 @@
 # Roadmap
+- [x] Retirar reproductor y limpiar carrusel y nombre de Aria
+- [x] Simplificar checkout sin recopilar tarjetas reales ni ocultar la ausencia de cobros
+- [x] Ampliar prueba y cinco niveles con pasos evaluados
+- [x] Eliminar productos y depurar registros antiguos
+- [x] Verificar los cambios sin alterar el diseño
 - [x] Actualizar identidad, metadatos y contacto de ACCORDO
 - [x] Integrar video principal, reproductor triple y rastro de notas
 - [x] Completar catálogo, selectores y simulación PDF

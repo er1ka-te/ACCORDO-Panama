@@ -45,17 +45,4 @@ export const confirmations = {
   Alquiler: "Tu alquiler fue realizada con éxito. Muchas gracias.",
   Donación: "Tu donación fue realizada con éxito. Muchas gracias por apoyar la música de jóvenes estudiantes.",
 };
-export const canOpenModule = (tested: boolean, completed: number, index: number) => tested && index <= completed;
-export const INITIAL_QUIZ = [
-  { pregunta: "¿Cuántas líneas tiene un pentagrama?", opciones: ["4", "5", "6"], correcta: "5" },
-  { pregunta: "¿Qué indica el tempo?", opciones: ["Velocidad del pulso", "Volumen", "Altura de una nota"], correcta: "Velocidad del pulso" },
-  { pregunta: "¿Qué nota sigue a Do?", opciones: ["Sol", "Re", "Si"], correcta: "Re" },
-];
-export const initialQuizCompleted = (answers: string[]) => answers.length === 3 && answers.every((a, i) => INITIAL_QUIZ[i]?.opciones.includes(a));
-export const MODULES = [
-  { titulo: "Notas y pentagrama", texto: "El pentagrama tiene cinco líneas y cuatro espacios. En clave de Sol, las líneas de abajo hacia arriba son Mi, Sol, Si, Re y Fa. Los espacios son Fa, La, Do y Mi. Practica nombrándolos en voz alta.", pregunta: "¿Cuál es la nota de la primera línea en clave de Sol?", opciones: ["Mi", "Do", "La"], correcta: "Mi" },
-  { titulo: "Pulso y ritmo", texto: "El pulso es regular; el ritmo combina duraciones. En 4/4, la negra dura un tiempo, la blanca dos y la redonda cuatro. Marca cuatro pulsos con palmas y alterna negras y blancas.", pregunta: "¿Cuántos tiempos dura una blanca en 4/4?", opciones: ["1", "2", "4"], correcta: "2" },
-  { titulo: "Escalas e intervalos", texto: "Do mayor contiene Do, Re, Mi, Fa, Sol, La y Si. Un intervalo mide la distancia entre dos notas. Do a Sol es una quinta justa. Canta lentamente la escala de ida y vuelta.", pregunta: "¿Qué intervalo hay entre Do y Sol?", opciones: ["Tercera", "Quinta justa", "Segunda"], correcta: "Quinta justa" },
-  { titulo: "Acordes y armonía", texto: "La tríada mayor se forma con raíz, tercera mayor y quinta justa. Do mayor es Do–Mi–Sol. Do menor cambia Mi por Mi bemol. Escucha y compara su carácter sin forzar las manos.", pregunta: "¿Qué notas forman Do mayor?", opciones: ["Do–Mi–Sol", "Do–Fa–La", "Re–Fa–La"], correcta: "Do–Mi–Sol" },
-  { titulo: "Práctica consciente", texto: "Empieza con postura relajada y movimientos suaves. Practica lentamente en fragmentos, descansa si hay tensión y aumenta el tempo gradualmente. Graba una frase, escucha y elige un detalle para mejorar.", pregunta: "¿Qué debes hacer si sientes dolor al tocar?", opciones: ["Tocar más fuerte", "Parar y revisar postura con un docente", "Aumentar el tempo"], correcta: "Parar y revisar postura con un docente" },
-];
+export { INITIAL_QUIZ, MODULES, canOpenModule, initialQuizCompleted, canCompleteStep } from "./learning";

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { PRODUCTOS_SEED, type Producto } from "./data";
+import { isAvailableProduct } from "./catalog-policy";
 
 /**
  * Catálogo compartido (simulado en el navegador con localStorage).
  * El panel de administración escribe aquí y el catálogo lo refleja.
  */
-const KEY = "accordo.catalogo.v2";
+const KEY = "accordo.catalogo.v3";
 const EVENT = "accordo:catalogo";
 
 let cache: Producto[] | null = null;
@@ -14,8 +15,10 @@ function read(): Producto[] {
   if (cache) return cache;
   if (typeof window === "undefined") return PRODUCTOS_SEED;
   try {
-    const raw = window.localStorage.getItem(KEY);
-    cache = raw ? (JSON.parse(raw) as Producto[]) : PRODUCTOS_SEED;
+    const raw = window.localStorage.getItem(KEY) ?? window.localStorage.getItem("accordo.catalogo.v2");
+    cache = (raw ? (JSON.parse(raw) as Producto[]) : PRODUCTOS_SEED).filter(isAvailableProduct);
+    window.localStorage.setItem(KEY, JSON.stringify(cache));
+    window.localStorage.removeItem("accordo.catalogo.v2");
   } catch {
     cache = PRODUCTOS_SEED;
   }
@@ -23,6 +26,7 @@ function read(): Producto[] {
 }
 
 function write(next: Producto[]) {
+  next = next.filter(isAvailableProduct);
   cache = next;
   try {
     window.localStorage.setItem(KEY, JSON.stringify(next));

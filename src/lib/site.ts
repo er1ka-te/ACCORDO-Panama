@@ -18,23 +18,7 @@ export const SITE = {
     tiktok: "https://tiktok.com",
     whatsapp: "https://wa.me/50760000000",
   },
-  tracks: [
-    {
-      title: "Clásica & Cuerdas",
-      mood: "Suave",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    },
-    {
-      title: "Sinfónica & Orquesta",
-      mood: "Inspiradora",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-    },
-    {
-      title: "Acústica & Piano",
-      mood: "Tranquila",
-      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
-    },
-  ],
+
 } as const;
 
 export const NAV = [
