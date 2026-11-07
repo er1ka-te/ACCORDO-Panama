@@ -1,4 +1,7 @@
 # Roadmap
+
+- [x] Header: logo centrado, sin carrito ni CTA, menú hamburguesa siempre oculto por defecto (Home, Shop con icono carrito, Dónde aprender, Publicar, Contacto, Panel)
+- [x] Hero: eliminar botones "Explorar catálogo" y "Ofrecer mi instrumento", conservar video, textos y estilos
 - [x] Retirar reproductor y limpiar carrusel y nombre de Aria
 - [x] Simplificar checkout sin recopilar tarjetas reales ni ocultar la ausencia de cobros
 - [x] Ampliar prueba y cinco niveles con pasos evaluados

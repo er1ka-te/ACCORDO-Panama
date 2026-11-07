@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import hero from "@/assets/hero-strings.jpg";
 import orchestraPoster from "@/assets/orquesta-poster.jpg";
 import { SITE } from "@/lib/site";
@@ -25,14 +24,6 @@ export function Hero() { return (
             <h1 className="mt-4 text-4xl leading-tight text-cream md:text-6xl">{SITE.name}</h1>
             <p className="mt-3 font-display text-3xl text-gold md:text-4xl">{SITE.slogan}</p>
             <p className="mt-5 max-w-xl text-base text-cream/80">{SITE.claim}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/catalogo" className="btn-gold">
-                Explorar catálogo
-              </Link>
-              <Link to="/publicar" className="btn-outline-gold">
-                Ofrecer mi instrumento
-              </Link>
-            </div>
           </div>
         </div>
       </section>
