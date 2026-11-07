@@ -6,6 +6,8 @@ export const SITE = {
   name: "ACCORDO",
   fullName: "ACCORDO Panamá",
   slogan: "Tu camino musical",
+  communityMessage:
+    "El punto de encuentro para la comunidad musical en Panamá. Conectamos instrumentos, libros y accesorios con estudiantes y fundaciones que los necesitan.",
   claim:
     "Alquila, compra o publica instrumentos, libros y partituras a precios accesibles para estudiantes de todo el país.",
   email: "contacto@accordopanama.com",

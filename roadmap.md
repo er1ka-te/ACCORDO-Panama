@@ -1,5 +1,9 @@
 # Roadmap
 
+- [x] Actualizar mensaje de comunidad del inicio y pie de página
+- [x] Sustituir tarjetas antiguas por dos tarjetas de impacto en espejo y reubicar carrusel
+- [x] Verificar botón Publicar, animaciones y diseño sin modificar menú ni video
+
 - [x] Header: logo centrado, sin carrito ni CTA, menú hamburguesa siempre oculto por defecto (Home, Shop con icono carrito, Dónde aprender, Publicar, Contacto, Panel)
 - [x] Hero: eliminar botones "Explorar catálogo" y "Ofrecer mi instrumento", conservar video, textos y estilos
 - [x] Retirar reproductor y limpiar carrusel y nombre de Aria

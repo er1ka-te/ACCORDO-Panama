@@ -15,3 +15,4 @@
 - Keep learning content and progression checks in a browser-safe learning module; persist validated step progress and reset legacy shorter-course progress on migration so levels cannot be skipped.
 - Filter removed products through the shared catalog policy on reads and writes, migrating prior local records without discarding unrelated publications.
 - Keep Aria's AI calls and prompt in server-only helpers behind validated server functions; never send service credentials to the browser.
+- Keep homepage impact presentation in a dedicated browser-safe component, and share the community message through site configuration so home and footer remain consistent.

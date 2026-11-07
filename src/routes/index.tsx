@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ShieldCheck, Truck, Wallet, Music4 } from "lucide-react";
 import catCuerda from "@/assets/cat-cuerda.jpg";
 import catViento from "@/assets/cat-viento.jpg";
 import catPercusion from "@/assets/cat-percusion.jpg";
@@ -8,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { OrchestraBackground } from "@/components/OrchestraBackground";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { DirectLinks } from "@/components/DirectLinks";
+import { ImpactCards } from "@/components/ImpactCards";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,32 +37,15 @@ const CATEGORIAS = [
   { img: catLibros, titulo: "Libros y Partituras", detalle: "Material físico y digital" },
 ];
 
-const VALORES = [
-  { Icon: Wallet, t: "Precios accesibles", d: "Desde $0 en donaciones y alquileres desde $6 al mes." },
-  { Icon: ShieldCheck, t: "Instrumentos verificados", d: "Revisión técnica y ficha de estado antes de publicar." },
-  { Icon: Truck, t: "Bodega y logística", d: "Recepción, inventario fotográfico y envío a todo el país." },
-  { Icon: Music4, t: "Comunidad musical", d: "Directorio de fundaciones y academias en cada provincia." },
-];
-
 function Inicio() {
   return (
     <>
       <OrchestraBackground />
       <Hero />
 
+      <ImpactCards />
       <AnnouncementBanner />
       <DirectLinks />
-
-      {/* VALORES */}
-      <section className="shell grid gap-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
-        {VALORES.map(({ Icon, t, d }) => (
-          <article key={t} className="card-lift rounded-xl border border-border bg-card p-6">
-            <Icon className="h-6 w-6 text-gold-deep" />
-            <h3 className="mt-4 text-xl">{t}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{d}</p>
-          </article>
-        ))}
-      </section>
 
       {/* CATEGORÍAS */}
       <section className="shell py-8">
