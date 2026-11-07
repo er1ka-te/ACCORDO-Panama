@@ -19,3 +19,4 @@
 - [x] Implementar donaciones y verificación educativa
 - [x] Añadir prueba inicial y ruta musical de estudio
 - [x] Renombrar asistente a Aria y verificar todos los flujos
+- [x] Extender el video de la orquesta como fondo fijo de toda la página de inicio

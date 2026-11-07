@@ -5,6 +5,7 @@ import catViento from "@/assets/cat-viento.jpg";
 import catPercusion from "@/assets/cat-percusion.jpg";
 import catLibros from "@/assets/cat-libros.jpg";
 import { Hero } from "@/components/Hero";
+import { OrchestraBackground } from "@/components/OrchestraBackground";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { DirectLinks } from "@/components/DirectLinks";
 
@@ -46,6 +47,7 @@ const VALORES = [
 function Inicio() {
   return (
     <>
+      <OrchestraBackground />
       <Hero />
 
       <AnnouncementBanner />
@@ -64,35 +66,37 @@ function Inicio() {
 
       {/* CATEGORÍAS */}
       <section className="shell py-8">
-        <p className="eyebrow">Catálogo</p>
-        <h2 className="mt-2 text-3xl md:text-4xl">Encuentra tu instrumento</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {CATEGORIAS.map((c) => (
-            <Link
-              key={c.titulo}
-              to="/catalogo"
-              className="card-lift group overflow-hidden rounded-xl border border-border bg-card"
-            >
-              <img
-                src={c.img}
-                alt={c.titulo}
-                loading="lazy"
-                width={900}
-                height={700}
-                className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="p-5">
-                <h3 className="text-xl">{c.titulo}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{c.detalle}</p>
-              </div>
-            </Link>
-          ))}
+        <div className="rounded-2xl border border-border bg-cream/95 p-6 shadow-[var(--shadow-soft)] md:p-10">
+          <p className="eyebrow">Catálogo</p>
+          <h2 className="mt-2 text-3xl md:text-4xl">Encuentra tu instrumento</h2>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {CATEGORIAS.map((c) => (
+              <Link
+                key={c.titulo}
+                to="/catalogo"
+                className="card-lift group overflow-hidden rounded-xl border border-border bg-card"
+              >
+                <img
+                  src={c.img}
+                  alt={c.titulo}
+                  loading="lazy"
+                  width={900}
+                  height={700}
+                  className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="p-5">
+                  <h3 className="text-xl">{c.titulo}</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">{c.detalle}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA DIRECTORIO */}
       <section className="shell py-16">
-        <div className="surface-coffee grid gap-6 rounded-2xl p-10 md:grid-cols-[1.4fr_auto] md:items-center">
+        <div className="surface-coffee grid gap-6 rounded-2xl p-10 ring-1 ring-gold/25 md:grid-cols-[1.4fr_auto] md:items-center">
           <div>
             <p className="eyebrow">Dónde aprender</p>
             <h2 className="mt-2 text-3xl text-cream">Academias, escuelas y fundaciones en Panamá</h2>
