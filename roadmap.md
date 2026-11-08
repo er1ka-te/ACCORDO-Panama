@@ -24,3 +24,5 @@
 - [x] Añadir prueba inicial y ruta musical de estudio
 - [x] Renombrar asistente a Aria y verificar todos los flujos
 - [x] Extender el video de la orquesta como fondo fijo de toda la página de inicio
+- [x] Añadir «Nuestro impacto en Panamá» entre tarjetas y carrusel, con silueta y cinco puntos interactivos
+- [x] Verificar detalles, animaciones, teclado y pantallas móviles sin cambiar menú ni orquesta

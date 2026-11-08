@@ -16,3 +16,4 @@
 - Filter removed products through the shared catalog policy on reads and writes, migrating prior local records without discarding unrelated publications.
 - Keep Aria's AI calls and prompt in server-only helpers behind validated server functions; never send service credentials to the browser.
 - Keep homepage impact presentation in a dedicated browser-safe component, and share the community message through site configuration so home and footer remain consistent.
+- Render geographic impact in an isolated browser-safe component using public-domain country geometry and accessible popovers; keep its supplied editorial figures separate from operational donation records.

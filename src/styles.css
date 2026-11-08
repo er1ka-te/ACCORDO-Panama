@@ -89,6 +89,14 @@
   --impact-surface: color-mix(in oklab, var(--cream) 82%, transparent);
   --shadow-impact: 0 0 32px 4px color-mix(in oklab, var(--gold) 35%, transparent);
   --text-glow: 0 0 14px color-mix(in oklab, var(--gold) 35%, transparent), 0 0 2px color-mix(in oklab, var(--cream) 40%, transparent);
+  --impact-map-gold: oklch(0.85 0.15 88);
+  --impact-map-fill: color-mix(in oklab, var(--coffee) 48%, transparent);
+  --impact-map-band: oklch(0.94 0.027 85);
+  --impact-map-paper: oklch(0.96 0.027 85);
+  --impact-map-ink: oklch(0.47 0.045 70);
+  --impact-map-heading: oklch(0.59 0.105 80);
+  --impact-map-glow: 0 0 8px color-mix(in oklab, var(--impact-map-gold) 70%, transparent);
+  --impact-paper-shadow: 0 12px 32px -8px color-mix(in oklab, var(--coffee) 55%, transparent);
 
   /* --- Ritmo / transiciones ---------------------------------------- */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -352,6 +360,77 @@
   pointer-events: none;
   background: repeating-linear-gradient(to bottom, var(--gold-deep) 0 1px, transparent 1px 25%);
   border-bottom: 1px solid var(--gold-deep);
+}
+
+/* Geographic impact: scoped presentation, independent of the existing home sections. */
+.panama-impact-drop {
+  transition: opacity 850ms var(--ease-soft), transform 850ms var(--ease-soft);
+}
+.panama-impact-drop[data-visible="false"] {
+  opacity: 0;
+  transform: translateY(-28px);
+}
+.panama-impact-band { background: var(--impact-map-band); }
+.panama-impact-title {
+  color: var(--impact-map-gold);
+  text-shadow: var(--impact-map-glow), 0 1px 1px var(--gold-deep);
+  letter-spacing: 0;
+}
+.panama-impact-outline {
+  fill: var(--impact-map-fill);
+  stroke: var(--impact-map-gold);
+  stroke-width: 1.8;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px var(--gold));
+}
+.panama-impact-point {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  background: transparent;
+}
+.panama-impact-point:hover,
+.panama-impact-point[data-state="open"] { background: transparent; }
+.panama-impact-point::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--impact-map-gold);
+  box-shadow: var(--impact-map-glow);
+}
+.panama-impact-point::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid var(--impact-map-gold);
+  border-radius: 50%;
+  animation: panama-impact-pulse 2.8s ease-out infinite;
+}
+.panama-impact-paper {
+  background: var(--impact-map-paper);
+  color: var(--impact-map-ink);
+  border-color: var(--gold-deep);
+  box-shadow: var(--impact-paper-shadow);
+  transform-origin: var(--radix-popover-content-transform-origin);
+}
+.panama-impact-paper[data-state="open"] { animation: panama-paper-unfold 280ms var(--ease-soft); }
+.panama-impact-paper h3 { color: var(--impact-map-heading); text-shadow: none; letter-spacing: 0; }
+@keyframes panama-impact-pulse {
+  0% { transform: scale(0.7); opacity: 0.7; }
+  85%, 100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes panama-paper-unfold {
+  from { opacity: 0; transform: translateY(6px) scaleY(0.88); }
+  to { opacity: 1; transform: translateY(0) scaleY(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .panama-impact-drop { transition: none; }
+  .panama-impact-drop[data-visible="false"] { opacity: 1; transform: none; }
+  .panama-impact-point::after, .panama-impact-paper[data-state="open"] { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -8,6 +8,7 @@ import { OrchestraBackground } from "@/components/OrchestraBackground";
 import { AnnouncementBanner } from "@/components/AnnouncementBanner";
 import { DirectLinks } from "@/components/DirectLinks";
 import { ImpactCards } from "@/components/ImpactCards";
+import { PanamaImpact } from "@/components/PanamaImpact";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,6 +45,7 @@ function Inicio() {
       <Hero />
 
       <ImpactCards />
+      <PanamaImpact />
       <AnnouncementBanner />
       <DirectLinks />
 
