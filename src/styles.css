@@ -86,8 +86,9 @@
   --gradient-gold: linear-gradient(100deg, var(--gold-deep), var(--gold));
   --shadow-soft: 0 10px 30px -18px color-mix(in oklab, var(--coffee) 45%, transparent);
   --shadow-gold: 0 18px 40px -20px color-mix(in oklab, var(--gold) 60%, transparent);
-  --impact-surface: color-mix(in oklab, var(--cream) 92%, transparent);
-  --shadow-impact: 0 0 28px 2px color-mix(in oklab, var(--card) 23%, transparent);
+  --impact-surface: color-mix(in oklab, var(--cream) 82%, transparent);
+  --shadow-impact: 0 0 32px 4px color-mix(in oklab, var(--gold) 35%, transparent);
+  --text-glow: 0 0 14px color-mix(in oklab, var(--gold) 35%, transparent), 0 0 2px color-mix(in oklab, var(--cream) 40%, transparent);
 
   /* --- Ritmo / transiciones ---------------------------------------- */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -318,6 +319,11 @@
 }
 
 /* Ruta de aprendizaje: cinco líneas estables, sin cambiar los estilos existentes. */
+.hero-glow h1,
+.hero-glow p {
+  text-shadow: var(--text-glow);
+}
+
 .impact-card {
   background: var(--impact-surface);
   box-shadow: var(--shadow-impact);

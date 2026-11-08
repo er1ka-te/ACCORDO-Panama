@@ -31,7 +31,7 @@ function ImpactCard({ reverse = false }: { reverse?: boolean }) {
   return <article ref={ref} data-visible={visible} className={`impact-card grid overflow-hidden rounded-lg border border-cream/40 text-foreground md:grid-cols-[2fr_3fr] ${reverse ? "impact-card-right md:grid-cols-[3fr_2fr]" : ""}`}>
     <img src={reverse ? studyImage : instrumentsImage} alt={reverse ? "Partituras, libros de estudio y un arco" : "Viola, arco y libros de música"} width={1024} height={1024} loading="lazy" className={`aspect-[4/3] h-full w-full object-cover md:aspect-auto ${reverse ? "md:order-2" : ""}`} />
     <div className="flex flex-col justify-center p-6 md:p-10">
-      <h2 className="text-3xl italic leading-tight md:text-4xl">
+      <h2 className="text-center text-3xl italic leading-tight md:text-4xl">
         {reverse ? "¿Qué puedes ofrecer y encontrar?" : "¿Qué es ACCORDO?"}{" "}
         {reverse ? <ViolaIcon /> : <Heart aria-hidden="true" className="inline-block h-7 w-7 text-gold-deep" />}
       </h2>
