@@ -9,7 +9,7 @@ export function SiteFooter() {
     <footer className="surface-coffee mt-24">
       <div className="shell grid gap-12 py-16 text-left md:grid-cols-3">
         <div>
-          <Logo inverted />
+          <Logo inverted align="left" />
           <p className="mt-4 max-w-xs text-left text-sm text-cream/70">{SITE.communityMessage}</p>
           <a href={`mailto:${SITE.email}`} className="mt-3 block text-sm text-gold hover:underline">{SITE.email}</a>
           <a href={`mailto:${SITE.supportEmail}`} className="mt-1 block text-sm text-cream/70 hover:underline">{SITE.supportEmail}</a>

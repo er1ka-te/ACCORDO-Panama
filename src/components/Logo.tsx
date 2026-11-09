@@ -2,10 +2,10 @@ import { SITE } from "@/lib/site";
 import { LOGO_HEADER_URL } from "@/lib/image-config";
 
 /** Marca editable: clave de Sol entrelazada con el perfil de una viola. */
-export function Logo({ inverted = false }: { inverted?: boolean }) {
+export function Logo({ inverted = false, align = "center" }: { inverted?: boolean; align?: "center" | "left" }) {
   if (LOGO_HEADER_URL) {
     return (
-      <span className="flex items-center justify-center">
+      <span className={`flex items-center ${align === "left" ? "justify-start" : "justify-center"}`}>
         <img
           src={LOGO_HEADER_URL}
           alt={`${SITE.name} — Tu camino musical`}
