@@ -378,8 +378,8 @@
   margin-inline: auto;
   touch-action: pan-y pinch-zoom;
 }
-.announcement-track { display: flex; gap: 28px; padding-block: 26px; }
-.announcement-slide { flex: 0 0 320px; min-width: 0; }
+.announcement-track { display: flex; margin-left: -24px; padding-block: 26px; }
+.announcement-slide { flex: 0 0 344px; min-width: 0; padding-left: 24px; }
 .announcement-image {
   display: block;
   width: 100%;
@@ -405,8 +405,7 @@
 .announcement-arrow-left { left: max(8px, calc((100% - 1120px) / 2)); }
 .announcement-arrow-right { right: max(8px, calc((100% - 1120px) / 2)); }
 @media (max-width: 639px) {
-  .announcement-track { gap: 20px; }
-  .announcement-slide { flex-basis: 72%; }
+  .announcement-slide { flex-basis: calc(72% + 24px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .announcement-image { transition: none; }
