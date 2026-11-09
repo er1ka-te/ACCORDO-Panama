@@ -97,6 +97,8 @@
   --impact-map-heading: oklch(0.59 0.105 80);
   --impact-map-glow: 0 0 8px color-mix(in oklab, var(--impact-map-gold) 70%, transparent);
   --impact-paper-shadow: 0 12px 32px -8px color-mix(in oklab, var(--coffee) 55%, transparent);
+  --announcement-band: color-mix(in oklab, var(--cream) 78%, transparent);
+  --shadow-announcement: 0 0 22px 2px color-mix(in oklab, var(--card) 65%, transparent);
 
   /* --- Ritmo / transiciones ---------------------------------------- */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -363,6 +365,54 @@
 }
 
 /* Geographic impact: scoped presentation, independent of the existing home sections. */
+.announcement-carousel::before {
+  content: "";
+  position: absolute;
+  inset: 22% 0;
+  z-index: -1;
+  background: var(--announcement-band);
+}
+.announcement-viewport {
+  overflow: hidden;
+  max-width: 860px;
+  margin-inline: auto;
+  touch-action: pan-y pinch-zoom;
+}
+.announcement-track { display: flex; gap: 28px; padding-block: 26px; }
+.announcement-slide { flex: 0 0 320px; min-width: 0; }
+.announcement-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-announcement);
+  transition: transform var(--speed) var(--ease-soft);
+}
+@media (hover: hover) {
+  .announcement-image:hover { transform: scale(1.05); }
+}
+.announcement-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  color: var(--coffee);
+  background: var(--announcement-band);
+  border-radius: 50%;
+}
+.announcement-arrow:hover { background: var(--cream); }
+.announcement-arrow-left { left: max(8px, calc((100% - 1120px) / 2)); }
+.announcement-arrow-right { right: max(8px, calc((100% - 1120px) / 2)); }
+@media (max-width: 639px) {
+  .announcement-track { gap: 20px; }
+  .announcement-slide { flex-basis: 72%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .announcement-image { transition: none; }
+  .announcement-image:hover { transform: none; }
+}
+
 .panama-impact-drop {
   transition: opacity 850ms var(--ease-soft), transform 850ms var(--ease-soft);
 }
