@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Trash2, Mail, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 import { announcementSchema, type Announcement, type Donation } from "@/lib/experience";
 import { ESCUELAS } from "@/lib/data";
 export function ExperienceAdmin() {

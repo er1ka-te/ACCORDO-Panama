@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { CreditCard, Smartphone, Landmark, Wallet, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 import { beneficiarySchema, confirmations, totalCart, type CartItem } from "@/lib/experience";
 const METHODS = [{ label: "Tarjeta de crédito", Icon: CreditCard }, { label: "Yappy", Icon: Smartphone }, { label: "Transferencia bancaria", Icon: Landmark }, { label: "PayPal", Icon: Wallet }];
 export function Checkout() {

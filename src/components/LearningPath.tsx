@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LockKeyhole, Check, Music2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 import { INITIAL_QUIZ, MODULES, canOpenModule, initialQuizCompleted, canCompleteStep } from "@/lib/experience";
 export function LearningPath() {
   const { state, update } = useExperience();

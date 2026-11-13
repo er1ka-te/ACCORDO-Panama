@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { ESCUELAS, IMAGENES } from "@/lib/data";
 import { donationSchema, confirmations } from "@/lib/experience";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 export function Donations() {
   const { state, update, addToCart } = useExperience();
   const [destino, setDestino] = useState<"Fundación" | "Comunidad">("Fundación");

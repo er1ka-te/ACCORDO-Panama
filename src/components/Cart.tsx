@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 import { totalCart } from "@/lib/experience";
 export function Cart() {
   const { state, update } = useExperience();

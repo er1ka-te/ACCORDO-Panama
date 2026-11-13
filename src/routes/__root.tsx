@@ -109,7 +109,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ExperienceProvider>{children}</ExperienceProvider>
         <Scripts />
       </body>
     </html>
@@ -121,7 +121,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ExperienceProvider>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
@@ -132,7 +131,6 @@ function RootComponent() {
         <AIChat />
         <MusicNoteTrail />
       </div>
-      </ExperienceProvider>
     </QueryClientProvider>
   );
 }

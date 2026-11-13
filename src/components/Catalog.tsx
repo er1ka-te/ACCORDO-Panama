@@ -3,7 +3,7 @@ import { FileText, X } from "lucide-react";
 import { RANGOS, formatPrecio, type Producto } from "@/lib/data";
 import { useCatalogo } from "@/lib/store";
 import { Link } from "@tanstack/react-router";
-import { useExperience } from "@/lib/experience-store";
+import { useExperience } from "@/lib/experience-context";
 import { Button } from "@/components/ui/button";
 
 

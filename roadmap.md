@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Corregir conexión del estado compartido y verificar inicio, carrusel y navegación
+- [x] Depurar categoría retirada del código y de registros locales sin borrar publicaciones válidas
+
 - [x] Actualizar mensaje de comunidad del inicio y pie de página
 - [x] Sustituir tarjetas antiguas por dos tarjetas de impacto en espejo y reubicar carrusel
 - [x] Verificar botón Publicar, animaciones y diseño sin modificar menú ni video
@@ -25,4 +28,4 @@
 - [x] Renombrar asistente a Aria y verificar todos los flujos
 - [x] Extender el video de la orquesta como fondo fijo de toda la página de inicio
 - [x] Añadir «Nuestro impacto en Panamá» entre tarjetas y carrusel, con silueta y cinco puntos interactivos
-- [x] Verificar detalles, animaciones, teclado y pantallas móviles sin cambiar menú ni orquesta
+- [x] Verificar detalles, animaciones, accesibilidad y pantallas móviles sin cambiar menú ni orquesta
