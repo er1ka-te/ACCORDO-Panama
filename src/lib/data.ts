@@ -4,7 +4,7 @@ import catLibros from "@/assets/cat-libros.jpg";
 import catPercusion from "@/assets/cat-percusion.jpg";
 
 export type Modalidad = "Venta" | "Alquiler" | "Donación";
-export type Familia = "Cuerda" | "Viento" | "Percusión" | "Teclado" | "Libros y Partituras" | "Accesorios";
+export type Familia = "Cuerda" | "Viento" | "Percusión" | "Libros y Partituras" | "Accesorios";
 export type Formato = "Físico" | "Digital";
 
 export type Producto = {
@@ -45,7 +45,6 @@ export const IMAGENES = {
   Cuerda: catCuerda,
   Viento: catViento,
   Percusión: catPercusion,
-  Teclado: PHOTOS.piano,
   "Libros y Partituras": catLibros,
   Accesorios: PHOTOS.accessory,
 } satisfies Record<Familia, string>;

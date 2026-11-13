@@ -6,7 +6,7 @@ import { ExperienceAdmin } from "@/components/ExperienceAdmin";
 
 
 
-const FAMILIAS: Familia[] = ["Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras", "Accesorios"];
+const FAMILIAS: Familia[] = ["Cuerda", "Viento", "Percusión", "Libros y Partituras", "Accesorios"];
 const MODALIDADES: Modalidad[] = ["Venta", "Alquiler", "Donación"];
 
 export function AdminPanel() {

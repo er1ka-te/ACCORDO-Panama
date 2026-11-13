@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 
 
-const FAMILIAS = ["Todos", "Cuerda", "Viento", "Percusión", "Teclado", "Libros y Partituras", "Accesorios"] as const;
+const FAMILIAS = ["Todos", "Cuerda", "Viento", "Percusión", "Libros y Partituras", "Accesorios"] as const;
 const MODALIDADES = ["Todas", "Venta", "Alquiler", "Donación"] as const;
 const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 

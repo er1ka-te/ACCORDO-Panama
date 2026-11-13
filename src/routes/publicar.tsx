@@ -83,7 +83,6 @@ function Publicar() {
                 <option>Instrumento de cuerda</option>
                 <option>Instrumento de viento</option>
                 <option>Percusión</option>
-                <option>Teclado</option>
                 <option>Libro o partitura</option>
               </select>
             </label>
