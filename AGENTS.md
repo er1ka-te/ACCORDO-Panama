@@ -19,3 +19,4 @@
 - Keep homepage impact presentation in a dedicated browser-safe component, and share the community message through site configuration so home and footer remain consistent.
 - Render geographic impact in an isolated browser-safe component using public-domain country geometry and accessible popovers; keep its supplied editorial figures separate from operational donation records.
 - Use Embla for the announcement carousel with existing provider images; keep autoplay browser-local and respect reduced motion and interaction pauses.
+- Keep launcher drag gestures in a browser-safe hook with pointer capture, viewport bounds and drag-click suppression; animate the launcher independently from the chat panel so moving it never clips the conversation.

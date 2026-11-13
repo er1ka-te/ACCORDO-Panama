@@ -485,3 +485,19 @@
 @media (prefers-reduced-motion: reduce) {
   .music-note-trail { display: none; }
 }
+
+.aria-launcher-button {
+  cursor: grab;
+  animation: aria-launcher-float 2.8s ease-in-out infinite;
+}
+.aria-launcher-button[data-dragging="true"] {
+  cursor: grabbing;
+  animation: none;
+}
+@keyframes aria-launcher-float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aria-launcher-button { animation: none; }
+}

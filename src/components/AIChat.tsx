@@ -4,9 +4,11 @@ import { Send, X, Sparkle, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { askAria } from "@/lib/aria.functions";
 import { ARIA_AVATAR_URL } from "@/lib/image-config";
+import { useDraggableLauncher } from "@/hooks/use-draggable-launcher";
 type Msg = { role: "bot" | "user"; text: string; error?: boolean };
 const SUGERENCIAS = ["¿Cómo mido el brazo para violín?", "¿Qué es un intervalo musical?", "¿Cómo practico el ritmo?"];
 export function AIChat() {
+  const launcher = useDraggableLauncher();
   const [open, setOpen] = useState(false); const [input, setInput] = useState(""); const [busy, setBusy] = useState(false);
   const [msgs, setMsgs] = useState<Msg[]>([{ role: "bot", text: "¡Hola! Soy Aria. ¿Qué quieres aprender o practicar hoy?" }]);
   const sendQuestion = useServerFn(askAria);
@@ -27,6 +29,8 @@ export function AIChat() {
       <div className="flex flex-wrap gap-1.5 px-3 pb-2">{SUGERENCIAS.map(s => <Button key={s} variant="outline" disabled={busy} onClick={() => void enviar(s)} className="h-auto whitespace-normal rounded-full px-2.5 py-1 text-[0.7rem]">{s}</Button>)}</div>
       <form className="flex items-center gap-2 border-t border-border p-3" onSubmit={e => { e.preventDefault(); void enviar(input); }}><input maxLength={1000} value={input} onChange={e => setInput(e.target.value)} placeholder="Escribe tu pregunta…" className="field min-w-0" aria-label="Mensaje para Aria" /><Button type="submit" variant="gold" size="icon" disabled={busy || !input.trim()} aria-label="Enviar"><Send /></Button></form>
     </section>}
-    <Button variant="gold" aria-expanded={open} aria-label="Abrir Aria" onClick={() => setOpen(v => !v)} className="h-auto rounded-full py-3 pl-3 pr-5">{avatar}<span>{open ? "Cerrar" : "Aria"}</span></Button>
+    <div ref={launcher.anchorRef} className="aria-launcher fixed bottom-20 right-3 sm:bottom-6 sm:right-6" style={launcher.position ? { left: launcher.position.x, top: launcher.position.y, right: "auto", bottom: "auto" } : undefined}>
+      <Button {...launcher.pointerHandlers} variant="gold" aria-expanded={open} aria-label={open ? "Cerrar Aria" : "Abrir Aria"} onClick={event => { if (event.detail !== 0 && launcher.consumeDragClick()) return; setOpen(v => !v); }} data-dragging={launcher.dragging} className="aria-launcher-button h-auto touch-none select-none rounded-full py-3 pl-3 pr-5">{avatar}<span>{open ? "Cerrar" : "Aria"}</span></Button>
+    </div>
   </div>;
 }
