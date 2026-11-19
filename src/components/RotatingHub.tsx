@@ -126,6 +126,9 @@ export function RotatingHub() {
           <strong>Embajador/a para Entregas:</strong> Lleva y reparte los
           instrumentos y mantiene la comunicación directa con las personas.
         </p>
+      <p className="border-t border-[#5A3921]/20 pt-2 text-[11px] font-medium text-[#4A2E1B]">
+          Escríbenos a nuestro contacto de ACCORDO Panamá para postularte.
+        </p>
       </div>
     );
   };
