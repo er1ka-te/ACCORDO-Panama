@@ -1,48 +1,38 @@
-import { useEffect, useState } from "react";
-import {
-  Music,
-  BookOpen,
-  Sparkles,
-  PartyPopper,
-  Guitar,
-  Headphones,
-} from "lucide-react";
+import { useState } from "react";
+import { Music, Music2, Sparkles } from "lucide-react";
 
-interface MuralPhoto {
+interface MuralStudent {
   id: string;
   imageSrc: string;
   imageAlt: string;
   fullName: string;
   age: number;
-  stageLabel: string;
   province: string;
   message: string;
   staggerClass: string;
-  frameAccent: string;
+  floatClass: string;
 }
 
-interface ConfettiPiece {
+interface WhiteConfettiPiece {
   id: number;
   left: number;
-  delay: number;
+  size: number;
   duration: number;
-  color: string;
-  rotate: number;
+  delay: number;
 }
 
-const MURAL_PHOTOS: MuralPhoto[] = [
+const MURAL_STUDENTS: MuralStudent[] = [
   {
     id: "mural-1",
     imageSrc: "/mural-1.png",
     imageAlt: "Niño de primaria sonriendo con su estuche de instrumento musical",
     fullName: "Mateo Castillo",
     age: 9,
-    stageLabel: "Primaria",
     province: "Panamá",
     message:
-      "¡Ahora puedo practicar mis notas todos los días y tocar canciones con mis amigos!",
-    staggerClass: "lg:-translate-y-4",
-    frameAccent: "border-rose-400 bg-rose-50",
+      "Ahora puedo practicar mis notas todos los días y llevar mi estuche con orgullo.",
+    staggerClass: "lg:-translate-y-5",
+    floatClass: "mural-float-a",
   },
   {
     id: "mural-2",
@@ -50,12 +40,11 @@ const MURAL_PHOTOS: MuralPhoto[] = [
     imageAlt: "Preadolescente de secundaria feliz sosteniendo su instrumento",
     fullName: "Valeria Mendoza",
     age: 12,
-    stageLabel: "Secundaria",
     province: "Chiriquí",
     message:
-      "Desde pequeña soñaba con tener un instrumento; hoy por fin se me da y me hace súper feliz.",
-    staggerClass: "lg:translate-y-5",
-    frameAccent: "border-amber-400 bg-amber-50",
+      "Tocar mi flauta me ayuda a concentrarme y compartir música en mi escuela.",
+    staggerClass: "lg:translate-y-7",
+    floatClass: "mural-float-b",
   },
   {
     id: "mural-3",
@@ -63,12 +52,11 @@ const MURAL_PHOTOS: MuralPhoto[] = [
     imageAlt: "Niño de primaria celebrando la entrega de su instrumento",
     fullName: "Lucas Serrano",
     age: 8,
-    stageLabel: "Primaria",
     province: "Coclé",
     message:
-      "Nunca pensé tener mi propio instrumento; hoy empecé a aprender el ritmo.",
-    staggerClass: "lg:-translate-y-3",
-    frameAccent: "border-sky-400 bg-sky-50",
+      "Cuando toco mi instrumento siento mucha alegría y ganas de aprender más.",
+    staggerClass: "lg:-translate-y-4",
+    floatClass: "mural-float-a",
   },
   {
     id: "mural-4",
@@ -76,255 +64,216 @@ const MURAL_PHOTOS: MuralPhoto[] = [
     imageAlt: "Preadolescente de secundaria sonriendo tras recibir su instrumento",
     fullName: "Sofía Quintero",
     age: 13,
-    stageLabel: "Secundaria",
     province: "Veraguas",
     message:
-      "Era un sueño que veía lejos y que por fin llegó; la música me da ilusión cada día.",
-    staggerClass: "lg:translate-y-4",
-    frameAccent: "border-emerald-400 bg-emerald-50",
+      "La música nos une y nos abre caminos que antes parecían lejanos.",
+    staggerClass: "lg:translate-y-6",
+    floatClass: "mural-float-b",
   },
 ];
 
-const CONFETTI_COLORS = [
-  "#FF3B7F",
-  "#FFB800",
-  "#00B894",
-  "#0984E3",
-  "#A55EEA",
-  "#FF6B35",
-];
-
 export function CommunityMural() {
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [confettiPieces, setConfettiPieces] = useState<ConfettiPiece[]>([]);
+  const [confetti, setConfetti] = useState<WhiteConfettiPiece[]>([]);
 
-  const triggerConfetti = () => {
-    const burst: ConfettiPiece[] = Array.from({ length: 42 }, (_, index) => ({
-      id: Date.now() + index,
-      left: Math.random() * 96 + 2,
+  const handleConfetti = () => {
+    const batchId = Date.now();
+    const pieces: WhiteConfettiPiece[] = Array.from({ length: 30 }, (_, idx) => ({
+      id: batchId + idx,
+      left: Math.random() * 100,
+      size: 6 + Math.random() * 7,
+      duration: 2.4 + Math.random() * 1.4,
       delay: Math.random() * 0.35,
-      duration: 1.6 + Math.random() * 1.1,
-      color: CONFETTI_COLORS[index % CONFETTI_COLORS.length] ?? "#FF3B7F",
-      rotate: Math.floor(Math.random() * 360),
     }));
-    setConfettiPieces(burst);
-  };
 
-  useEffect(() => {
-    if (confettiPieces.length === 0) return;
-    const clearTimer = window.setTimeout(() => {
-      setConfettiPieces([]);
-    }, 3000);
-    return () => window.clearTimeout(clearTimer);
-  }, [confettiPieces]);
+    setConfetti((prev) => [...prev, ...pieces]);
+
+    window.setTimeout(() => {
+      setConfetti((prev) =>
+        prev.filter((item) => !pieces.some((added) => added.id === item.id))
+      );
+    }, 4200);
+  };
 
   return (
     <section
-      aria-label="Mural comunitario"
-      className="relative z-20 w-full overflow-hidden bg-gradient-to-br from-[#FF6B9D] via-[#FFC857] to-[#4ECDC4] py-16 text-slate-900 shadow-[inset_0_12px_30px_rgba(0,0,0,0.12)]"
+      aria-label="Mural comunitario ACCORDO"
+      className="relative isolate min-h-[700px] w-full overflow-hidden bg-transparent pt-20 pb-36 md:pt-24 md:pb-44"
     >
       <style>{`
-        @keyframes muralPhotoBobA {
-          0%, 100% { transform: translateY(0px) rotate(-1.2deg); }
-          50% { transform: translateY(-9px) rotate(1deg); }
+        @keyframes muralFloatA {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-7px); }
         }
-        @keyframes muralPhotoBobB {
-          0%, 100% { transform: translateY(-7px) rotate(1.2deg); }
-          50% { transform: translateY(4px) rotate(-1deg); }
+        @keyframes muralFloatB {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(7px); }
         }
-        @keyframes confettiFall {
+        @keyframes whiteConfettiFall {
           0% {
-            transform: translateY(-20px) rotate(0deg) scale(1);
-            opacity: 1;
+            transform: translateY(-14px) rotate(0deg);
+            opacity: 0.95;
           }
           100% {
-            transform: translateY(520px) rotate(540deg) scale(0.85);
+            transform: translateY(620px) rotate(340deg);
             opacity: 0;
           }
         }
-        @keyframes sparkTwinkle {
-          0%, 100% { transform: scale(0.85) rotate(0deg); opacity: 0.45; }
-          50% { transform: scale(1.15) rotate(15deg); opacity: 0.9; }
+        .mural-float-a {
+          animation: muralFloatA 5.4s ease-in-out infinite;
         }
-        .mural-card-a {
-          animation: muralPhotoBobA 4.5s ease-in-out infinite;
+        .mural-float-b {
+          animation: muralFloatB 6.1s ease-in-out infinite;
         }
-        .mural-card-b {
-          animation: muralPhotoBobB 5s ease-in-out infinite;
-        }
-        .confetti-piece {
-          animation-name: confettiFall;
-          animation-timing-function: cubic-bezier(0.22, 0.8, 0.36, 1);
+        .white-confetti-piece {
+          position: absolute;
+          top: -12px;
+          background-color: #FFFFFF;
+          border-radius: 2px;
+          box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+          animation-name: whiteConfettiFall;
+          animation-timing-function: linear;
           animation-fill-mode: forwards;
-        }
-        .mural-spark {
-          animation: sparkTwinkle 3.2s ease-in-out infinite;
         }
       `}</style>
 
-      {/* Fondo festivo de chispas y celebración */}
+      {/* Confeti blanco */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 overflow-hidden"
+        className="pointer-events-none absolute inset-0 z-30 overflow-hidden"
       >
-        <span className="mural-spark absolute left-[6%] top-[12%] h-3.5 w-3.5 rounded-full bg-fuchsia-600/70" />
-        <span className="mural-spark absolute left-[18%] top-[28%] h-2.5 w-6 rotate-45 rounded-full bg-indigo-600/60" />
-        <span className="mural-spark absolute left-[34%] top-[10%] h-4 w-4 rounded-sm bg-white/80" />
-        <span className="mural-spark absolute right-[28%] top-[15%] h-3 w-7 -rotate-25 rounded-full bg-rose-600/65" />
-        <span className="mural-spark absolute right-[12%] top-[22%] h-4 w-4 rounded-full bg-violet-700/65" />
-        <span className="mural-spark absolute left-[12%] bottom-[16%] h-3.5 w-3.5 rounded-sm bg-teal-800/60" />
-        <span className="mural-spark absolute left-[48%] bottom-[10%] h-3 w-6 rotate-12 rounded-full bg-amber-700/60" />
-        <span className="mural-spark absolute right-[18%] bottom-[14%] h-4 w-4 rounded-full bg-pink-700/65" />
-
-        {/* Líneas suaves de pentagrama decorativo */}
-        <svg
-          className="absolute inset-x-0 top-1/2 h-28 w-full -translate-y-1/2 opacity-20"
-          viewBox="0 0 1200 120"
-          fill="none"
-        >
-          <path d="M0 20 Q 300 5, 600 20 T 1200 20" stroke="#1e1b4b" strokeWidth="2" />
-          <path d="M0 32 Q 300 17, 600 32 T 1200 32" stroke="#1e1b4b" strokeWidth="2" />
-          <path d="M0 44 Q 300 29, 600 44 T 1200 44" stroke="#1e1b4b" strokeWidth="2" />
-          <path d="M0 56 Q 300 41, 600 56 T 1200 56" stroke="#1e1b4b" strokeWidth="2" />
-          <path d="M0 68 Q 300 53, 600 68 T 1200 68" stroke="#1e1b4b" strokeWidth="2" />
-        </svg>
+        {confetti.map((piece) => (
+          <span
+            key={piece.id}
+            className="white-confetti-piece"
+            style={{
+              left: `${piece.left}%`,
+              width: `${piece.size}px`,
+              height: `${piece.size * 0.65}px`,
+              animationDuration: `${piece.duration}s`,
+              animationDelay: `${piece.delay}s`,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Lluvia de confeti al presionar el botón */}
-      {confettiPieces.length > 0 && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-30 overflow-hidden"
-        >
-          {confettiPieces.map((piece) => (
-            <span
-              key={piece.id}
-              className="confetti-piece absolute top-0 h-3.5 w-2.5 rounded-xs shadow-xs"
-              style={{
-                left: `${piece.left}%`,
-                backgroundColor: piece.color,
-                animationDelay: `${piece.delay}s`,
-                animationDuration: `${piece.duration}s`,
-                transform: `rotate(${piece.rotate}deg)`,
-              }}
-            />
-          ))}
-        </div>
-      )}
+      {/* Pentagrama dorado brillante de fondo */}
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1440 580"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full"
+        style={{
+          filter: "drop-shadow(0 0 9px rgba(235, 198, 86, 0.72))",
+        }}
+      >
+        <defs>
+          <linearGradient id="goldStaffGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#C99E28" />
+            <stop offset="35%" stopColor="#F8DC81" />
+            <stop offset="70%" stopColor="#D9B236" />
+            <stop offset="100%" stopColor="#F9E59E" />
+          </linearGradient>
+        </defs>
+        {[0, 16, 32, 48, 64].map((offsetY, idx) => (
+          <path
+            key={idx}
+            d={`M -40 ${210 + offsetY} C 240 ${110 + offsetY}, 440 ${340 + offsetY}, 720 ${225 + offsetY} C 1020 ${105 + offsetY}, 1220 ${335 + offsetY}, 1480 ${205 + offsetY}`}
+            fill="none"
+            stroke="url(#goldStaffGrad)"
+            strokeWidth={idx === 2 ? "2.2" : "1.5"}
+            strokeLinecap="round"
+            opacity={0.95}
+          />
+        ))}
+      </svg>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-5 rounded-3xl bg-white/85 p-6 shadow-xl backdrop-blur-xs md:flex-row md:items-center md:p-8">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-fuchsia-600 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>Mural de alegría</span>
-            </div>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-              Historias que nacen con la música
+      {/* Notas musicales doradas brillantes rodeando el título y el pentagrama */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10"
+        style={{ color: "#E8C458" }}
+      >
+        <Music
+          className="absolute top-12 left-[14%] h-5 w-5 -rotate-12 md:left-[24%]"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+        <Music2
+          className="absolute top-14 right-[15%] h-5 w-5 rotate-12 md:right-[24%]"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+        <Music2
+          className="absolute top-44 left-[7%] h-6 w-6 -rotate-6"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+        <Music
+          className="absolute top-48 right-[8%] h-6 w-6 rotate-12"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+        <Music
+          className="absolute bottom-24 left-[18%] h-5 w-5 rotate-6"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+        <Music2
+          className="absolute bottom-20 right-[18%] h-5 w-5 -rotate-12"
+          style={{ filter: "drop-shadow(0 0 8px rgba(232, 196, 88, 0.85))" }}
+        />
+      </div>
+
+      <div className="relative z-20 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {/* Título en cursiva color café reforzado con línea fina y fondo beige translúcido */}
+        <div className="mx-auto mb-14 flex max-w-xl items-center justify-between gap-4 rounded-2xl border border-[#5A3921]/25 bg-[#EFE7D6]/55 px-6 py-4 shadow-xs backdrop-blur-[2px]">
+          <div className="min-w-0 flex-1">
+            <h2
+              className="font-serif text-2xl font-semibold italic tracking-wide text-[#3A1F0E] sm:text-3xl"
+              style={{ textShadow: "0 1px 0 rgba(255, 250, 240, 0.65)" }}
+            >
+              Nuestro Mural Musical
             </h2>
-            <p className="mt-2 max-w-2xl text-sm font-medium text-slate-700">
-              Pasa el cursor sobre cada fotografía para leer el mensaje que cada
-              niño quiere compartir.
-            </p>
+            <div className="mt-2 h-[2px] w-28 bg-[#7A4922]/85" />
           </div>
 
           <button
             type="button"
-            onClick={triggerConfetti}
-            className="inline-flex shrink-0 cursor-pointer items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-600 via-pink-500 to-amber-500 px-6 py-3 text-sm font-bold text-white shadow-lg transition-transform duration-200 hover:scale-105 active:scale-95"
+            onClick={handleConfetti}
+            aria-label="Confeti"
+            className="flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full border border-[#5A3921]/25 bg-[#FAF6EE]/65 text-[#3A1F0E] transition hover:bg-[#FAF6EE]/90"
           >
-            <PartyPopper className="h-4 w-4" />
-            <span>¡Lanzar confeti!</span>
+            <Sparkles className="h-4 w-4" />
           </button>
         </div>
 
-        {/* Fila de 4 fotografías verticales con movimiento y adornos musicales */}
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {MURAL_PHOTOS.map((photo, index) => {
-            const isHovered = hoveredId === photo.id;
-            const animClass = index % 2 === 0 ? "mural-card-a" : "mural-card-b";
-
-            return (
-              <div
-                key={photo.id}
-                onMouseEnter={() => setHoveredId(photo.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                className={`relative ${photo.staggerClass}`}
+        {/* 4 marcos fotográficos sin fondo extra, alternados sobre el pentagrama */}
+        <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+          {MURAL_STUDENTS.map((student) => (
+            <div key={student.id} className={student.staggerClass}>
+              <article
+                className={`${student.floatClass} group relative rounded-lg border border-white bg-white p-2 transition-transform duration-300 hover:z-20 hover:scale-[1.03]`}
+                style={{
+                  boxShadow:
+                    "0 12px 28px rgba(255, 255, 255, 0.95), 0 4px 14px rgba(74, 46, 27, 0.08)",
+                }}
               >
-                {/* Adornos flotantes de música, libros y accesorios */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -left-3 -top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white text-fuchsia-600 shadow-md"
-                >
-                  {index % 4 === 0 && <Music className="h-4 w-4" />}
-                  {index % 4 === 1 && <BookOpen className="h-4 w-4" />}
-                  {index % 4 === 2 && <Guitar className="h-4 w-4" />}
-                  {index % 4 === 3 && <Headphones className="h-4 w-4" />}
-                </span>
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm">
+                  <img
+                    src={student.imageSrc}
+                    alt={student.imageAlt}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
 
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -bottom-3 -right-3 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-amber-300 text-slate-900 shadow-md"
-                >
-                  {index % 2 === 0 ? (
-                    <BookOpen className="h-4 w-4" />
-                  ) : (
-                    <Music className="h-4 w-4" />
-                  )}
-                </span>
-
-                {/* Contorno / marco con nombre y apellido, edad, provincia y mensaje */}
-                <article
-                  className={`${animClass} relative overflow-hidden rounded-2xl border-4 ${photo.frameAccent} p-3 shadow-2xl transition-all duration-300`}
-                >
-                  <div className="mb-2 flex items-center justify-between gap-2 rounded-xl bg-slate-900 px-3 py-2 text-white">
-                    <div>
-                      <p className="text-sm font-bold leading-tight">
-                        {photo.fullName}, {photo.age} años
-                      </p>
-                      <p className="text-[11px] font-medium text-amber-300">
-                        {photo.stageLabel} · Provincia: {photo.province}
-                      </p>
-                    </div>
-                    <Music className="h-4 w-4 shrink-0 text-pink-400" />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-[#3A2314]/88 p-3.5 text-xs leading-relaxed text-[#FAF6EE] opacity-0 backdrop-blur-xs transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                    “{student.message}”
                   </div>
+                </div>
 
-                  {/* Fotografía rectangular vertical tipo cámara */}
-                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-slate-200">
-                    <img
-                      src={photo.imageSrc}
-                      alt={photo.imageAlt}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-
-                    {/* Mensaje del niño al pasar el mouse */}
-                    <div
-                      className={`absolute inset-x-0 bottom-0 flex flex-col justify-end bg-gradient-to-t from-slate-950/95 via-slate-950/80 to-transparent p-4 text-white transition-all duration-300 ${
-                        isHovered
-                          ? "translate-y-0 opacity-100"
-                          : "pointer-events-none translate-y-4 opacity-0"
-                      }`}
-                    >
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-300">
-                        Mensaje de {photo.fullName}
-                      </span>
-                      <p className="mt-1 text-xs font-medium leading-relaxed text-white">
-                        “{photo.message}”
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-2 flex items-center justify-between px-1 text-[11px] font-semibold text-slate-700">
-                    <span>{photo.province}</span>
-                    <span>
-                      {isHovered ? "Mensaje visible" : "Pasa el mouse"}
-                    </span>
-                  </div>
-                </article>
-              </div>
-            );
-          })}
+                <div className="pt-2.5 pb-1 text-center">
+                  <p className="font-serif text-sm italic text-[#4A2E1B] sm:text-base">
+                    {student.fullName}, {student.age} años · {student.province}
+                  </p>
+                </div>
+              </article>
+            </div>
+          ))}
         </div>
       </div>
     </section>

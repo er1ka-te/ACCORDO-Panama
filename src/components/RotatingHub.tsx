@@ -1,312 +1,221 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  Music,
-  HandHeart,
-  Landmark,
-  ArrowRight,
-  ChevronDown,
-  RotateCw,
-} from "lucide-react";
 
-type CardId = "modulos" | "voluntarios" | "donaciones";
-
-interface ExpandedBlock {
-  label: string;
-  text: string;
-}
-
-interface HubItem {
-  id: CardId;
-  badge: string;
+interface HubRectItem {
+  id: "modulos" | "donaciones" | "voluntarios";
   title: string;
-  shortDesc: string;
-  imageBg: string;
-  imageAlt: string;
-  solidColorClass: string;
-  expandedTitle: string;
-  expandedContent: ExpandedBlock[];
-  ctaLabel?: string;
-  ctaTo?: "/estudio";
+  image: string;
+  shortPhrase: string;
+  hasTestLink?: boolean;
+  to?: string;
 }
 
-const HUB_ITEMS: HubItem[] = [
+const HUB_ITEMS: readonly HubRectItem[] = [
   {
     id: "modulos",
-    badge: "100% Gratuitos",
-    title: "Módulos de aprendizaje",
-    shortDesc:
-      "Formación musical interactiva con ruta guiada desde tus primeros pasos.",
-    imageBg: "/modulos-bg.jpg",
-    imageAlt: "Estudiante practicando teoría y lectura musical",
-    solidColorClass: "bg-[#3B281E] text-cream border-[#7A583B]",
-    expandedTitle: "¿Cómo funcionan los módulos de estudio?",
-    expandedContent: [
-      {
-        label: "1. Prueba inicial",
-        text: "Primero se realiza una prueba corta para conocer tu punto de partida, tu familiaridad con la música y el ritmo de estudio que mejor se adapta a ti.",
-      },
-      {
-        label: "2. Avance por módulos",
-        text: "Con base en esa prueba entras a los módulos gratuitos de lectura, ritmo y fundamentos musicales para avanzar de forma ordenada y sin costo.",
-      },
-    ],
-    ctaLabel: "Ir a módulos de estudio",
-    ctaTo: "/estudio",
-  },
-  {
-    id: "voluntarios",
-    badge: "Convocatoria abierta",
-    title: "Voluntarios",
-    shortDesc:
-      "Revisión técnica, logística hacia provincias centrales y acompañamiento en entregas.",
-    imageBg: "/voluntariado-entrega.jpg",
-    imageAlt: "Persona entregando un instrumento musical a un estudiante",
-    solidColorClass: "bg-[#4A3222] text-cream border-[#8C6D46]",
-    expandedTitle: "¿Qué tipo de voluntarios buscamos?",
-    expandedContent: [
-      {
-        label: "Revisión y mantenimiento técnico (lutería)",
-        text: "Personas con conocimientos técnicos para inspeccionar, ajustar, calibrar y reparar instrumentos antes de listarlos en la plataforma, enviarlos a las provincias centrales o entregarlos a fundaciones.",
-      },
-      {
-        label: "Transporte y logística",
-        text: "Voluntarios que apoyen en el traslado seguro y embalaje adecuado de los instrumentos hasta los puntos de acopio, fundaciones o provincias centrales.",
-      },
-      {
-        label: "Acompañamiento en entregas",
-        text: "Equipo humano que acompañe las entregas presenciales a niños, jóvenes y organizaciones beneficiadas, cuidando el trato cercano y el registro del proceso.",
-      },
-    ],
+    title: "Módulos de estudio",
+    image: "/modulos-bg.jpg",
+    shortPhrase: "Descubre tu nivel y avanza en tu ruta musical.",
+    hasTestLink: true,
+    to: "/estudios",
   },
   {
     id: "donaciones",
-    badge: "Aporte directo",
     title: "Donaciones",
-    shortDesc:
-      "Apoya el acceso musical mediante Yappy o transferencia a cuenta bancaria.",
-    imageBg: "/donacion.png",
-    imageAlt: "Apoyo musical y comunitario en Panamá",
-    solidColorClass: "bg-[#2C1E16] text-cream border-[#6E5239]",
-    expandedTitle: "Canales de aporte y destino de las donaciones",
-    expandedContent: [
-      {
-        label: "Mensaje",
-        text: "Cada aporte ayuda a que más estudiantes en Panamá tengan acceso a formación e instrumentos en buen estado sin que el costo sea una barrera.",
-      },
-      {
-        label: "A dónde van las donaciones",
-        text: "Se destinan a fundaciones musicales, escuelas comunitarias, proyectos formativos y entregas hacia las provincias centrales del país.",
-      },
-      {
-        label: "Yappy (ejemplo panameño)",
-        text: "Número: 6482-3910 — Nombre que te debe salir: Fundación Accordo Panamá",
-      },
-      {
-        label: "Banco — Cuenta Corriente (ejemplo)",
-        text: "Cuenta corriente: 03-45-01-884920-7 — A nombre de: Fundación Accordo Panamá",
-      },
-    ],
+    image: "/donacion.png",
+    shortPhrase: "Impulsa el traslado y entrega de instrumentos en Panamá.",
+    hasTestLink: false,
   },
-];
+  {
+    id: "voluntarios",
+    title: "Voluntarios",
+    image: "/voluntariado-entrega.png",
+    shortPhrase: "Suma tu apoyo técnico, logístico y comunitario.",
+    hasTestLink: false,
+  },
+] as const;
 
 export function RotatingHub() {
-  const [centerIndex, setCenterIndex] = useState<number>(0);
-  const [hoveredId, setHoveredId] = useState<CardId | null>(null);
+  const [order, setOrder] = useState<number[]>([0, 1, 2]);
+  const [hoveredId, setHoveredId] = useState<HubRectItem["id"] | null>(null);
 
   useEffect(() => {
     if (hoveredId !== null) return;
-    const timer = window.setInterval(() => {
-      setCenterIndex((prev) => (prev + 1) % HUB_ITEMS.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
+
+    const interval = window.setInterval(() => {
+      setOrder((prev) => {
+        const [first, ...rest] = prev;
+        return first !== undefined ? [...rest, first] : [0, 1, 2];
+      });
+    }, 4500);
+
+    return () => window.clearInterval(interval);
   }, [hoveredId]);
 
-  const handleRotateNext = () => {
-    setCenterIndex((prev) => (prev + 1) % HUB_ITEMS.length);
-  };
+  const orderedItems: HubRectItem[] = order
+    .map((idx) => HUB_ITEMS[idx])
+    .filter((item): item is HubRectItem => item !== undefined);
 
-  const getSafeHubItem = (index: number): HubItem => {
-    const found = HUB_ITEMS[index];
-    if (found) return found;
-    return HUB_ITEMS[0] as HubItem;
-  };
+  const renderExpandedPanel = (id: HubRectItem["id"]) => {
+    if (id === "modulos") {
+      return (
+        <div className="space-y-3 text-left text-xs leading-relaxed text-[#3A1F0E]">
+          <p className="font-serif text-base font-bold text-[#3A1F0E]">
+            Módulos de Estudio
+          </p>
+          <p>
+            <strong>1.</strong> Se realiza una prueba para verificar en qué nivel
+            se encuentra la persona con su conocimiento en la música.
+          </p>
+          <p>
+            <strong>2.</strong> Luego de pasar la prueba, automáticamente inicia
+            los módulos de aprendizaje con una pequeña ruta de aprendizaje que se
+            muestra en qué parte vas del módulo.
+          </p>
+          <div className="pt-1">
+            <Link
+              to="/estudio"
+              className="inline-block rounded-lg bg-[#3A2314] px-4 py-2 text-xs font-semibold text-[#FAF6EE] transition hover:bg-[#5A3921]"
+            >
+              Iniciar Prueba
+            </Link>
+          </div>
+        </div>
+      );
+    }
 
-  const leftIndex = (centerIndex + HUB_ITEMS.length - 1) % HUB_ITEMS.length;
-  const rightIndex = (centerIndex + 1) % HUB_ITEMS.length;
+    if (id === "donaciones") {
+      return (
+        <div className="space-y-3 text-left text-xs leading-relaxed text-[#3A1F0E]">
+          <p className="font-serif text-base font-bold text-[#3A1F0E]">
+            Donaciones
+          </p>
+          <div className="rounded-lg bg-white/75 p-2.5">
+            <p className="font-semibold text-[#5A3921]">Yappy</p>
+            <p className="mt-0.5 flex flex-wrap items-center justify-between gap-2">
+              <span>+507 6565-8090</span>
+              <span className="font-semibold">Fundación ACCORDO</span>
+            </p>
+          </div>
+          <div className="rounded-lg bg-white/75 p-2.5">
+            <p className="font-semibold text-[#5A3921]">Cuenta de banco - Corriente</p>
+            <p className="mt-0.5 flex flex-wrap items-center justify-between gap-2">
+              <span>03-88-88-654321-0</span>
+              <span className="font-semibold">ACCORDO Panamá</span>
+            </p>
+          </div>
+        </div>
+      );
+    }
 
-  const orderedCards: { item: HubItem; position: "left" | "center" | "right" }[] = [
-    { item: getSafeHubItem(leftIndex), position: "left" },
-    { item: getSafeHubItem(centerIndex), position: "center" },
-    { item: getSafeHubItem(rightIndex), position: "right" },
-  ];
-
-  const renderIcon = (id: CardId, className = "h-5 w-5 text-gold") => {
-    if (id === "modulos") return <Music className={className} />;
-    if (id === "voluntarios") return <HandHeart className={className} />;
-    return <Landmark className={className} />;
+    return (
+      <div className="space-y-2 text-left text-xs leading-snug text-[#3A1F0E]">
+        <p className="font-serif text-base font-bold text-[#3A1F0E]">
+          Voluntarios
+        </p>
+        <p>
+          <strong>Técnico/a de Mantenimiento y Luthiería:</strong> Verifica,
+          mantiene y repara instrumentos para que estén listos para usarse.
+        </p>
+        <p>
+          <strong>Especialista de Logística e Inventario:</strong> Coordina el
+          transporte, revisa la logística y lleva el control de inventario de los
+          instrumentos.
+        </p>
+        <p>
+          <strong>Embajador/a para Entregas:</strong> Lleva y reparte los
+          instrumentos y mantiene la comunicación directa con las personas.
+        </p>
+      </div>
+    );
   };
 
   return (
-    <section className="shell py-14">
+    <section
+      aria-label="Módulos de estudio, donaciones y voluntarios"
+      className="relative z-10 mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8"
+    >
       <style>{`
-        @keyframes hubFloatLeft {
-          0%, 100% { transform: translateY(0px) rotate(-1deg); }
-          50% { transform: translateY(-7px) rotate(0.8deg); }
+        @keyframes hubRectMotionA {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-5px); }
         }
-        @keyframes hubFloatRight {
-          0%, 100% { transform: translateY(-6px) rotate(1deg); }
-          50% { transform: translateY(2px) rotate(-0.8deg); }
+        @keyframes hubRectMotionB {
+          0%, 100% { transform: translateY(-4px); }
+          50% { transform: translateY(3px); }
         }
-        .hub-side-left {
-          animation: hubFloatLeft 4.2s ease-in-out infinite;
+        @keyframes glowingBoxDrift {
+          0%, 100% { transform: translateY(0px) scale(1); }
+          50% { transform: translateY(-4px) scale(1.01); }
         }
-        .hub-side-right {
-          animation: hubFloatRight 4.6s ease-in-out infinite;
+        .hub-card-motion-a {
+          animation: hubRectMotionA 4.6s ease-in-out infinite;
+        }
+        .hub-card-motion-b {
+          animation: hubRectMotionB 5.2s ease-in-out infinite;
+        }
+        .glowing-info-rect {
+          animation: glowingBoxDrift 3.2s ease-in-out infinite;
+          box-shadow: 0 0 24px rgba(255, 248, 224, 0.95), 0 10px 26px rgba(58, 35, 20, 0.22);
         }
       `}</style>
 
-      <div className="rounded-3xl border border-border bg-cream/95 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.22)] md:p-10">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="eyebrow">Explora ACCORDO</p>
-            <h2 className="mt-2 text-3xl md:text-4xl">
-              Aprende, súmate como voluntario o dona
-            </h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Las tarjetas rotan automáticamente. La del centro muestra su imagen
-              y, al pasar el cursor, despliega más información.
-            </p>
-          </div>
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
+        {orderedItems.map((item, idx) => {
+          const isCenterCard = idx === 1;
+          const isHovered = hoveredId === item.id;
+          const cardMotionClass =
+            idx % 2 === 0 ? "hub-card-motion-a" : "hub-card-motion-b";
 
-          <button
-            type="button"
-            onClick={handleRotateNext}
-            className="inline-flex items-center gap-2 self-start rounded-full border border-border bg-card px-4 py-2 text-xs font-medium text-foreground shadow-[0_6px_18px_rgba(0,0,0,0.14)] transition hover:border-gold hover:bg-cream sm:self-auto"
-          >
-            <RotateCw className="h-3.5 w-3.5 text-gold" />
-            <span>Rotar posición</span>
-          </button>
-        </div>
+          const baseSurfaceClass = isCenterCard
+            ? "bg-[#4A2E1B] text-[#FAF6EE] border-[#8C5A32]/40 shadow-[0_10px_24px_rgba(74,46,27,0.28)]"
+            : "bg-[#EFE7D6] text-[#3A1F0E] border-[#5A3921]/20 shadow-[0_10px_24px_rgba(90,57,33,0.16)]";
 
-        <div className="mt-8 grid items-center gap-6 lg:grid-cols-[0.85fr_1.3fr_0.85fr]">
-          {orderedCards.map(({ item, position }) => {
-            const isCenter = position === "center";
-            const isExpanded = isCenter && hoveredId === item.id;
+          return (
+            <article
+              key={item.id}
+              onMouseEnter={() => setHoveredId(item.id)}
+              onMouseLeave={() => setHoveredId(null)}
+              className={`relative flex h-[340px] flex-col overflow-hidden rounded-xl border transition-all duration-300 ${baseSurfaceClass} ${cardMotionClass}`}
+            >
+              {/* Imagen grande arriba */}
+              <div className="h-52 w-full shrink-0 overflow-hidden bg-[#2C1A0E]">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
 
-            if (!isCenter) {
-              return (
-                <article
-                  key={item.id}
-                  onClick={() => {
-                    const realIdx = HUB_ITEMS.findIndex((x) => x.id === item.id);
-                    if (realIdx !== -1) setCenterIndex(realIdx);
-                  }}
-                  className={`${item.solidColorClass} ${
-                    position === "left" ? "hub-side-left" : "hub-side-right"
-                  } flex min-h-[210px] cursor-pointer flex-col items-center justify-between rounded-3xl border p-6 text-center shadow-[0_16px_36px_rgba(0,0,0,0.28)] transition-all duration-500 hover:scale-[1.03] hover:shadow-[0_22px_44px_rgba(0,0,0,0.36)]`}
+              {/* Espacio inferior más pequeño con título y una frase corta */}
+              <div className="flex flex-1 flex-col justify-center px-4 py-2.5 text-center">
+                <h3
+                  className={`font-serif text-base font-bold ${
+                    isCenterCard ? "text-[#FAF6EE]" : "text-[#3A1F0E]"
+                  }`}
                 >
-                  <span className="rounded-full bg-black/25 px-3 py-1 text-[11px] tracking-wide text-cream/80">
-                    Toca para centrar
-                  </span>
+                  {item.title}
+                </h3>
+                <p
+                  className={`mt-1 line-clamp-2 text-xs leading-snug ${
+                    isCenterCard ? "text-[#FAF6EE]/85" : "text-[#4A2E1B]"
+                  }`}
+                >
+                  {item.shortPhrase}
+                </p>
+              </div>
 
-                  <h3 className="my-4 text-lg font-semibold leading-snug text-cream">
-                    {item.title}
-                  </h3>
-
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-black/25 shadow-inner">
-                    {renderIcon(item.id, "h-5 w-5 text-gold")}
-                  </div>
-                </article>
-              );
-            }
-
-            return (
-              <article
-                key={item.id}
-                onMouseEnter={() => setHoveredId(item.id)}
-                onMouseLeave={() => setHoveredId(null)}
-                className="relative overflow-hidden rounded-3xl border border-gold/75 bg-surface-coffee text-cream shadow-[0_25px_60px_rgba(0,0,0,0.38)] transition-all duration-500 lg:scale-[1.03]"
-              >
-                <div className="relative h-52 w-full overflow-hidden">
-                  <img
-                    src={item.imageBg}
-                    alt={item.imageAlt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                  <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-medium text-cream shadow-md backdrop-blur-xs">
-                    {item.badge}
-                  </span>
+              {/* Rectángulo brillante desplegable al pasar el cursor */}
+              {isHovered && (
+                <div
+                  className="glowing-info-rect pointer-events-auto absolute inset-2 z-20 flex flex-col justify-center overflow-y-auto rounded-xl border border-white bg-[#FFFDF7]/95 p-4 backdrop-blur-xs"
+                >
+                  {renderExpandedPanel(item.id)}
                 </div>
-
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-2xl font-semibold text-cream">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-cream/85">
-                        {item.shortDesc}
-                      </p>
-                    </div>
-                    <ChevronDown
-                      className={`mt-1 h-5 w-5 shrink-0 text-gold transition-transform duration-300 ${
-                        isExpanded ? "rotate-180" : ""
-                      }`}
-                    />
-                  </div>
-
-                  {item.ctaTo && item.ctaLabel && (
-                    <div className="mt-4">
-                      <Link
-                        to={item.ctaTo}
-                        className="btn-gold inline-flex items-center gap-2 text-sm shadow-lg transition-transform hover:scale-105"
-                      >
-                        <span>{item.ctaLabel}</span>
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  )}
-
-                  <div
-                    className={`grid transition-all duration-300 ease-out ${
-                      isExpanded
-                        ? "mt-5 grid-rows-[1fr] opacity-100"
-                        : "mt-0 grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <div className="space-y-3 rounded-2xl border border-white/15 bg-black/35 p-4 text-xs leading-relaxed text-cream/90 shadow-inner">
-                        <p className="font-semibold uppercase tracking-wider text-gold">
-                          {item.expandedTitle}
-                        </p>
-                        {item.expandedContent.map((block) => (
-                          <div key={block.label} className="space-y-0.5">
-                            <p className="font-semibold text-cream">
-                              {block.label}:
-                            </p>
-                            <p className="text-cream/85">{block.text}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
-                    <span className="text-[11px] text-cream/70">
-                      Pasa el cursor para ver detalles
-                    </span>
-                    <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-black/30 shadow-md">
-                      {renderIcon(item.id, "h-5 w-5 text-gold")}
-                    </div>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
