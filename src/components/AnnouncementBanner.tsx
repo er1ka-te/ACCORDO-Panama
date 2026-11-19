@@ -14,13 +14,25 @@ const ANUNCIOS_CARRUSEL = [
   {
     id: "anuncio-2",
     titulo: "Anuncio 2",
-    imagen: "/fotos/anuncio-2.jpg",
+    imagen: "/fotos/anuncio-2.png",
     activo: true,
   },
   {
     id: "anuncio-3",
     titulo: "Anuncio 3",
-    imagen: "/fotos/anuncio-3.jpg",
+    imagen: "/fotos/anuncio-3.png",
+    activo: true,
+  },
+  {
+    id: "anuncio-4",
+    titulo: "Anuncio 4",
+    imagen: "/fotos/anuncio-4.png",
+    activo: true,
+  },
+  {
+    id: "anuncio-5",
+    titulo: "Anuncio 5",
+    imagen: "/fotos/anuncio-5.png",
     activo: true,
   },
 ];
@@ -61,7 +73,13 @@ export function AnnouncementBanner() {
       }}
       className="announcement-carousel relative isolate py-6"
     >
-      <div className="announcement-viewport" ref={carouselRef}>
+      {/* Franja beige de fondo detrás de los anuncios */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-1/2 -z-10 h-44 -translate-y-1/2 bg-[#e8dfd3]/80"
+      />
+
+      <div className="announcement-viewport relative z-10" ref={carouselRef}>
         <div className="announcement-track">
           {anuncios.map((anuncio, i) => (
             <div
@@ -81,12 +99,13 @@ export function AnnouncementBanner() {
           ))}
         </div>
       </div>
+
       {anuncios.length > 1 && (
         <>
           <Button
             variant="ghost"
             size="icon"
-            className="announcement-arrow announcement-arrow-left"
+            className="announcement-arrow announcement-arrow-left z-20"
             aria-label="Anuncio anterior"
             onClick={() => carousel?.scrollPrev()}
           >
@@ -95,7 +114,7 @@ export function AnnouncementBanner() {
           <Button
             variant="ghost"
             size="icon"
-            className="announcement-arrow announcement-arrow-right"
+            className="announcement-arrow announcement-arrow-right z-20"
             aria-label="Anuncio siguiente"
             onClick={() => carousel?.scrollNext()}
           >
