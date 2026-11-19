@@ -1,9 +1,4 @@
 import { z } from "zod";
-import orchestra from "@/assets/orquesta-poster.jpg";
-import strings from "@/assets/cat-cuerda.jpg";
-import piano from "@/assets/cat-libros.jpg";
-import winds from "@/assets/cat-viento.jpg";
-import percussion from "@/assets/cat-percusion.jpg";
 
 export const announcementSchema = z.object({
   id: z.string().min(1), titulo: z.string().trim().min(1).max(100),
@@ -12,14 +7,7 @@ export const announcementSchema = z.object({
   activo: z.boolean(), membresia: z.enum(["Pendiente", "Pagada (demo)", "Sin membresía"]),
   tarifa: z.number().finite().min(0).max(10000),
 });
-export type Announcement = z.infer<typeof announcementSchema>;
-// IMÁGENES DE ANUNCIOS: cambia `imagen` aquí o desde Anuncios en el Panel.
-export const ANNOUNCEMENTS: Announcement[] = [
-  { id: "ad1", titulo: "Encuentro de jóvenes músicos", detalle: "Eventos y ensambles · anuncio de ejemplo", imagen: orchestra, destino: "/directorio", activo: true, membresia: "Sin membresía", tarifa: 0 },
-  { id: "ad2", titulo: "Tu próximo paso en la música", detalle: "Academias de Panamá · consulta programas y disponibilidad", imagen: strings, destino: "/directorio", activo: true, membresia: "Sin membresía", tarifa: 0 },
-  { id: "ad3", titulo: "Un instrumento, una oportunidad", detalle: "Fundaciones y donaciones para la formación musical", imagen: winds, destino: "/donaciones", activo: true, membresia: "Sin membresía", tarifa: 0 },
-  { id: "ad4", titulo: "Aprende a tu propio ritmo", detalle: "Profesores particulares · descubre tu especialidad", imagen: piano, destino: "/directorio", activo: true, membresia: "Sin membresía", tarifa: 0 },
-  { id: "ad5", titulo: "Cada nota cuenta", detalle: "Comienza tu ruta de estudio musical", imagen: percussion, destino: "/estudio", activo: true, membresia: "Sin membresía", tarifa: 0 },
+
 ];
 
 export const beneficiarySchema = z.object({
