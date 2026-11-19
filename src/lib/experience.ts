@@ -32,3 +32,28 @@ export const confirmations = {
   Donación: "Tu donación fue realizada con éxito. Muchas gracias por apoyar la música de jóvenes estudiantes.",
 };
 export { INITIAL_QUIZ, MODULES, canOpenModule, initialQuizCompleted, canCompleteStep } from "./learning";
+
+export type Announcement = z.infer<typeof announcementSchema>;
+
+export const ANNOUNCEMENTS: Announcement[] = [
+  {
+    id: "anuncio-1",
+    titulo: "Convocatoria de práctica y orquesta",
+    detalle: "Espacios y recursos musicales para estudiantes en Panamá.",
+    imagen: "/fotos/anuncio-1.jpg",
+    destino: "/estudio",
+    activo: true,
+    membresia: "Sin membresía",
+    tarifa: 0,
+  },
+  {
+    id: "anuncio-2",
+    titulo: "Catálogo de instrumentos y accesorios",
+    detalle: "Explora opciones de alquiler, compra y donación.",
+    imagen: "/fotos/anuncio-2.jpg",
+    destino: "/catalogo",
+    activo: true,
+    membresia: "Sin membresía",
+    tarifa: 0,
+  },
+];
