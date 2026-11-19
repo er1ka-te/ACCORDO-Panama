@@ -470,3 +470,52 @@ export const formatPrecio = (p: Producto) =>
   p.precio === 0
     ? "Donación ($0)"
     : `$${p.precio}${p.unidad ? ` ${p.unidad}` : ""}`;
+
+export type FaqItem = {
+  id: string;
+  pregunta: string;
+  respuesta: string;
+};
+
+export const FAQS: FaqItem[] = [
+  {
+    id: "faq-1",
+    pregunta: "¿Cómo funcionan el alquiler, la compra y las donaciones en ACCORDO?",
+    respuesta:
+      "Puedes explorar instrumentos y materiales según su modalidad y contactar o agregar al carrito lo que necesites para tu práctica o estudio.",
+  },
+  {
+    id: "faq-2",
+    pregunta: "¿Cómo elijo la talla correcta de un instrumento de cuerda?",
+    respuesta:
+      "Revisa la guía de medidas por largo de brazo y edad aproximada antes de seleccionar la talla en el catálogo.",
+  },
+  {
+    id: "faq-3",
+    pregunta: "¿Puedo donar o solicitar apoyo musical?",
+    respuesta:
+      "Sí, las secciones de donaciones y estudio están pensadas para conectar estudiantes con recursos e iniciativas musicales.",
+  },
+];
+
+export type EscuelaItem = {
+  id: string;
+  nombre: string;
+  ubicacion: string;
+  especialidad: string;
+};
+
+export const ESCUELAS: EscuelaItem[] = [
+  {
+    id: "esc-1",
+    nombre: "Programa Juvenil de Cuerdas",
+    ubicacion: "Panamá",
+    especialidad: "Violín, viola, violonchelo y práctica orquestal",
+  },
+  {
+    id: "esc-2",
+    nombre: "Taller Comunitario de Viento y Percusión",
+    ubicacion: "Panamá",
+    especialidad: "Iniciación musical y ensamble",
+  },
+];
