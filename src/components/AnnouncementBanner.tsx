@@ -8,31 +8,31 @@ const ANUNCIOS_CARRUSEL = [
   {
     id: "anuncio-1",
     titulo: "Anuncio 1",
-    imagen: "/fotos/anuncio-1.png",
+    imagen: "/anuncio-1.png",
     activo: true,
   },
   {
     id: "anuncio-2",
     titulo: "Anuncio 2",
-    imagen: "/fotos/anuncio-2.png",
+    imagen: "/anuncio-2.png",
     activo: true,
   },
   {
     id: "anuncio-3",
     titulo: "Anuncio 3",
-    imagen: "/fotos/anuncio-3.png",
+    imagen: "/anuncio-3.png",
     activo: true,
   },
   {
     id: "anuncio-4",
     titulo: "Anuncio 4",
-    imagen: "/fotos/anuncio-4.png",
+    imagen: "/anuncio-4.png",
     activo: true,
   },
   {
     id: "anuncio-5",
     titulo: "Anuncio 5",
-    imagen: "/fotos/anuncio-5.png",
+    imagen: "/anuncio-5.png",
     activo: true,
   },
 ];
