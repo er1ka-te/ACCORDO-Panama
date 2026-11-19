@@ -1,16 +1,39 @@
 import { useMemo, useState } from "react";
 import { FileText, X } from "lucide-react";
-import { RANGOS, formatPrecio, type Producto } from "@/lib/data";
+import {
+  RANGOS,
+  celloSizeGuides,
+  doubleBassSizeGuides,
+  formatPrecio,
+  violaSizeGuides,
+  violinSizeGuides,
+  type Producto,
+  type StringSizeGuide,
+} from "@/lib/data";
 import { useCatalogo } from "@/lib/store";
 import { Link } from "@tanstack/react-router";
 import { useExperience } from "@/lib/experience-context";
 import { Button } from "@/components/ui/button";
 
-
-
-const FAMILIAS = ["Todos", "Cuerda", "Viento", "Percusión", "Libros y Partituras", "Accesorios"] as const;
+const FAMILIAS = [
+  "Todos",
+  "Cuerda",
+  "Viento",
+  "Percusión",
+  "Libros y Partituras",
+  "Accesorios",
+] as const;
 const MODALIDADES = ["Todas", "Venta", "Alquiler", "Donación"] as const;
 const FORMATOS = ["Todos", "Físico", "Digital"] as const;
+
+function getGuidesForProduct(producto: Producto | null): StringSizeGuide[] | null {
+  if (!producto || producto.familia !== "Cuerda") return null;
+  if (producto.tipo === "Violín") return violinSizeGuides;
+  if (producto.tipo === "Viola") return violaSizeGuides;
+  if (producto.tipo === "Violonchelo") return celloSizeGuides;
+  if (producto.tipo === "Contrabajo") return doubleBassSizeGuides;
+  return null;
+}
 
 export function Catalog() {
   const { productos } = useCatalogo();
@@ -23,6 +46,7 @@ export function Catalog() {
   const [detalle, setDetalle] = useState<Producto | null>(null);
   const [opcion, setOpcion] = useState("");
   const [pdfAbierto, setPdfAbierto] = useState(false);
+
   const abrirDetalle = (producto: Producto) => {
     setDetalle(producto);
     setOpcion("");
@@ -36,25 +60,41 @@ export function Catalog() {
       (p) =>
         (familia === "Todos" || p.familia === familia) &&
         (modalidad === "Todas" || p.modalidad === modalidad) &&
-        (formato === "Todos" || p.formato === formato || familia !== "Libros y Partituras") &&
+        (formato === "Todos" ||
+          p.formato === formato ||
+          familia !== "Libros y Partituras") &&
         p.precio >= r.min &&
         p.precio <= r.max,
     );
   }, [productos, familia, modalidad, formato, rango]);
+
+  const activeGuides = useMemo(() => getGuidesForProduct(detalle), [detalle]);
+
+  const selectedGuide = useMemo(() => {
+    if (!activeGuides || !opcion) return null;
+    return (
+      activeGuides.find((g) => g.size === opcion || g.label === opcion) ?? null
+    );
+  }, [activeGuides, opcion]);
 
   return (
     <div className="shell py-14">
       <p className="eyebrow">Catálogo</p>
       <h1 className="mt-2 text-4xl">Instrumentos, libros y partituras</h1>
       <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-        Usa los filtros para encontrar exactamente lo que necesitas para tus clases.
+        Usa los filtros para encontrar exactamente lo que necesitas.
       </p>
 
       {/* FILTROS */}
       <div className="mt-8 grid gap-5 rounded-xl border border-border bg-card p-6">
         <Grupo titulo="Categoría">
           {FAMILIAS.map((f) => (
-            <button key={f} type="button" onClick={() => setFamilia(f)} className={`chip ${familia === f ? "chip-active" : ""}`}>
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFamilia(f)}
+              className={`chip ${familia === f ? "chip-active" : ""}`}
+            >
               {f}
             </button>
           ))}
@@ -62,7 +102,12 @@ export function Catalog() {
 
         <Grupo titulo="Modalidad">
           {MODALIDADES.map((m) => (
-            <button key={m} type="button" onClick={() => setModalidad(m)} className={`chip ${modalidad === m ? "chip-active" : ""}`}>
+            <button
+              key={m}
+              type="button"
+              onClick={() => setModalidad(m)}
+              className={`chip ${modalidad === m ? "chip-active" : ""}`}
+            >
               {m}
             </button>
           ))}
@@ -71,7 +116,12 @@ export function Catalog() {
         {familia === "Libros y Partituras" && (
           <Grupo titulo="Formato">
             {FORMATOS.map((f) => (
-              <button key={f} type="button" onClick={() => setFormato(f)} className={`chip ${formato === f ? "chip-active" : ""}`}>
+              <button
+                key={f}
+                type="button"
+                onClick={() => setFormato(f)}
+                className={`chip ${formato === f ? "chip-active" : ""}`}
+              >
                 {f}
               </button>
             ))}
@@ -80,19 +130,29 @@ export function Catalog() {
 
         <Grupo titulo="Precio">
           {RANGOS.map((r) => (
-            <button key={r.id} type="button" onClick={() => setRango(r.id)} className={`chip ${rango === r.id ? "chip-active" : ""}`}>
+            <button
+              key={r.id}
+              type="button"
+              onClick={() => setRango(r.id)}
+              className={`chip ${rango === r.id ? "chip-active" : ""}`}
+            >
               {r.label}
             </button>
           ))}
         </Grupo>
       </div>
 
-      <p className="mt-6 text-sm text-muted-foreground">{lista.length} resultado(s)</p>
+      <p className="mt-6 text-sm text-muted-foreground">
+        {lista.length} resultado(s)
+      </p>
 
       {/* TARJETAS */}
       <div className="mt-5 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {lista.map((p) => (
-          <article key={p.id} className="card-lift group overflow-hidden rounded-xl border border-border bg-card">
+          <article
+            key={p.id}
+            className="card-lift group overflow-hidden rounded-xl border border-border bg-card"
+          >
             <div className="relative overflow-hidden">
               <img
                 src={p.imagen}
@@ -112,10 +172,18 @@ export function Catalog() {
             <div className="p-5">
               <p className="eyebrow text-[0.65rem]">{p.familia}</p>
               <h3 className="mt-1 text-xl leading-snug">{p.titulo}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">Estado: {p.estado}</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Estado: {p.estado}
+              </p>
               <div className="mt-4 flex items-center justify-between gap-3">
-                <span className="font-display text-2xl text-gold-deep">{formatPrecio(p)}</span>
-                <button type="button" className="btn-coffee px-4 py-2 text-xs" onClick={() => abrirDetalle(p)}>
+                <span className="font-display text-2xl text-gold-deep">
+                  {formatPrecio(p)}
+                </span>
+                <button
+                  type="button"
+                  className="btn-coffee px-4 py-2 text-xs"
+                  onClick={() => abrirDetalle(p)}
+                >
                   Ver detalles
                 </button>
               </div>
@@ -151,11 +219,21 @@ export function Catalog() {
             >
               <X className="h-4 w-4" />
             </button>
-            <img src={detalle.imagen} alt={detalle.titulo} width={900} height={700} className="h-56 w-full object-cover" />
+            <img
+              src={detalle.imagen}
+              alt={detalle.titulo}
+              width={900}
+              height={700}
+              className="h-56 w-full object-cover"
+            />
             <div className="p-6">
-              <p className="eyebrow">{detalle.modalidad} · {detalle.familia}</p>
+              <p className="eyebrow">
+                {detalle.modalidad} · {detalle.familia}
+              </p>
               <h2 className="mt-2 text-2xl">{detalle.titulo}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">{detalle.descripcion}</p>
+              <p className="mt-3 text-sm text-muted-foreground">
+                {detalle.descripcion}
+              </p>
               <dl className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div>
                   <dt className="text-muted-foreground">Precio</dt>
@@ -166,24 +244,106 @@ export function Catalog() {
                   <dd className="font-semibold">{detalle.estado}</dd>
                 </div>
               </dl>
+
               <label className="mt-4 grid gap-1.5 text-sm font-semibold">
-                {detalle.selectorLabel ?? "Presentación"} <span className="text-destructive">*</span>
-                <select required value={opcion} onChange={(e) => setOpcion(e.target.value)} className="field">
+                {detalle.selectorLabel ?? "Presentación"}{" "}
+                <span className="text-destructive">*</span>
+                <select
+                  required
+                  value={opcion}
+                  onChange={(e) => setOpcion(e.target.value)}
+                  className="field"
+                >
                   <option value="">Selecciona una opción</option>
-                  {(detalle.opciones ?? ["Standard"]).map((item) => <option key={item} value={item}>{item}</option>)}
+                  {activeGuides
+                    ? activeGuides.map((guide) => (
+                        <option key={guide.size} value={guide.size}>
+                          {guide.label}
+                        </option>
+                      ))
+                    : (detalle.opciones ?? ["Standard"]).map((item) => (
+                        <option key={item} value={item}>
+                          {item}
+                        </option>
+                      ))}
                 </select>
               </label>
-              {detalle.pdfPreview && (
-                <div className="mt-4">
-                  <button type="button" onClick={() => setPdfAbierto(true)} className="btn-outline-gold w-full">
-                    <FileText className="h-4 w-4" /> Vista previa PDF
-                  </button>
-                  {pdfAbierto && <p role="status" className="mt-2 rounded-md bg-secondary p-3 text-sm">Vista previa demostrativa de {detalle.titulo}. El archivo completo se entregará únicamente con autorización de derechos.</p>}
+
+              {activeGuides && (
+                <div className="mt-3 rounded-lg border border-border bg-secondary/50 p-3 text-xs">
+                  {selectedGuide ? (
+                    <div className="space-y-1">
+                      <p className="font-semibold text-foreground">
+                        Guía para talla {selectedGuide.size} ({detalle.tipo}):
+                      </p>
+                      <p className="text-muted-foreground">
+                        <strong>Largo de brazo:</strong> {selectedGuide.armCm}
+                      </p>
+                      <p className="text-muted-foreground">
+                        <strong>Edad recomendada:</strong> {selectedGuide.ageRange}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground">
+                      Selecciona una talla para ver el largo de brazo en centímetros y la edad recomendada para {detalle.tipo.toLowerCase()}.
+                    </p>
+                  )}
                 </div>
               )}
+
+              {detalle.pdfPreview && (
+                <div className="mt-4">
+                  <button
+                    type="button"
+                    onClick={() => setPdfAbierto(true)}
+                    className="btn-outline-gold w-full"
+                  >
+                    <FileText className="h-4 w-4" /> Vista previa PDF
+                  </button>
+                  {pdfAbierto && (
+                    <p
+                      role="status"
+                      className="mt-2 rounded-md bg-secondary p-3 text-sm"
+                    >
+                      Vista previa demostrativa de {detalle.titulo}. El archivo
+                      completo se entregará únicamente con autorización de
+                      derechos.
+                    </p>
+                  )}
+                </div>
+              )}
+
               <div className="mt-6 space-y-3">
-                <Button variant="gold" disabled={!opcion || agregado} className="h-auto w-full whitespace-normal" onClick={() => { addToCart({ id: detalle.id, titulo: detalle.titulo, imagen: detalle.imagen, modalidad: detalle.modalidad, precio: detalle.modalidad === "Donación" ? 0 : detalle.precio, opcion }); setAgregado(true); }}>{agregado ? "Añadido al carrito" : detalle.modalidad === "Venta" ? "Comprar · añadir al carrito" : detalle.modalidad === "Alquiler" ? "Alquilar · añadir al carrito" : "Solicitar donación gratuita"}</Button>
-                {agregado && <Button asChild variant="outline" className="w-full"><Link to="/carrito">Ver carrito</Link></Button>}
+                <Button
+                  variant="gold"
+                  disabled={!opcion || agregado}
+                  className="h-auto w-full whitespace-normal"
+                  onClick={() => {
+                    addToCart({
+                      id: detalle.id,
+                      titulo: detalle.titulo,
+                      imagen: detalle.imagen,
+                      modalidad: detalle.modalidad,
+                      precio:
+                        detalle.modalidad === "Donación" ? 0 : detalle.precio,
+                      opcion,
+                    });
+                    setAgregado(true);
+                  }}
+                >
+                  {agregado
+                    ? "Añadido al carrito"
+                    : detalle.modalidad === "Venta"
+                      ? "Comprar · añadir al carrito"
+                      : detalle.modalidad === "Alquiler"
+                        ? "Alquilar · añadir al carrito"
+                        : "Solicitar donación gratuita"}
+                </Button>
+                {agregado && (
+                  <Button asChild variant="outline" className="w-full">
+                    <Link to="/carrito">Ver carrito</Link>
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -193,7 +353,13 @@ export function Catalog() {
   );
 }
 
-function Grupo({ titulo, children }: { titulo: string; children: React.ReactNode }) {
+function Grupo({
+  titulo,
+  children,
+}: {
+  titulo: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <h2 className="eyebrow">{titulo}</h2>
