@@ -8,8 +8,6 @@ export const announcementSchema = z.object({
   tarifa: z.number().finite().min(0).max(10000),
 });
 
-];
-
 export const beneficiarySchema = z.object({
   estudios: z.string().trim().min(10, "Describe tus estudios o interés musical (mínimo 10 caracteres).").max(500),
   objetivo: z.string().trim().min(10, "Describe cómo practicarás (mínimo 10 caracteres).").max(500),
