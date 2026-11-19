@@ -52,11 +52,11 @@ export function SiteFooter() {
           <div className="mt-4 grid gap-2">
             {FAQS.slice(0, 4).map((f) => (
               <details
-                key={f.q}
+                key={f.id}
                 className="rounded-md border border-cream/12 p-3 text-sm text-cream/75 transition-colors hover:border-gold/40"
               >
-                <summary className="cursor-pointer font-semibold text-cream">{f.q}</summary>
-                <p className="mt-2 text-cream/70">{f.a}</p>
+                <summary className="cursor-pointer font-semibold text-cream">{f.pregunta}</summary>
+                <p className="mt-2 text-cream/70">{f.respuesta}</p>
               </details>
             ))}
           </div>
