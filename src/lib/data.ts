@@ -552,13 +552,49 @@ export const ESCUELAS: EscuelaItem[] = [
       "Programa formativo de fundación sin fines de lucro · Consulta convocatorias e inscripción directa.",
   },
   {
+    id: "red-orquestas-coros-panama",
+    tipo: "Fundación",
+    nombre: "Red de Orquestas y Coros Juveniles de Panamá",
+    imagen: "/red.jfif",
+    ubicacion:
+      "Módulos orquestales y corales en distintas provincias y distritos de Panamá.",
+    telefono: "+507 6973-7214/524-4836",
+    sitioWeb: "https://micultura.gob.pa/servicios/red-de-orquestas-y-coros-infantiles-y-juveniles-de-panama/",
+    instagram: "https://www.instagram.com/laredpanama/?hl=es",
+    enfoque:
+      "Formación musical gratuita en orquestas, coros, cuerdas, vientos y percusión a través de módulos en diversas comunidades del país.",
+    trayectoria:
+      "Programa de educación musical comunitaria con presencia en múltiples módulos provinciales y distritales de Panamá.",
+    modalidadClases: "Ensayos por módulos, práctica de conjunto y presentaciones comunitarias.",
+    planes:
+      "Programa formativo de red y fundación · Verifica el módulo más cercano a tu provincia o distrito.",
+  },
+  {
+    id: "fundacion-danilo-perez",
+    tipo: "Fundación",
+    nombre: "Fundación Danilo Pérez",
+    imagen: "/danilo.jpg",
+    ubicacion:
+      "Bethania Calle 63 A Oeste casa 12, Panama City.",
+    telefono: "+507  211-0272",
+    instagram: "https://www.instagram.com/fundaciondaniloperez/?hl=es",
+    maps: "https://maps.app.goo.gl/2LaewEbod5GTVgsY7",
+    enfoque:
+      "Educación musical, jazz, música contemporánea, folclore, ensambles, becas, clínicas y formación artística para niños y jóvenes.",
+    trayectoria:
+      "Fundación cultural panameña reconocida por impulsar el talento joven y el intercambio musical en Panamá y a nivel internacional.",
+    modalidadClases: "Clases, talleres, ensambles y programas formativos.",
+    planes:
+      "Programa de fundación · Consulta becas, convocatorias y requisitos de inscripción directamente.",
+  },
+  {
     id: "amp",
     tipo: "Academia pagada",
     nombre: "Academia de Música de Panamá (AMP)",
     imagen: "/amp.png",
     ubicacion:
       "San Francisco (Calle 71 Este) y Town Center Costa del Este, Ciudad de Panamá.",
-    telefono: "+(507) 392-2324",
+    telefono: "+507 392-2324",
     sitioWeb: "https://www.ampenlinea.com/",
     instagram: "https://www.instagram.com/ampenlinea/?hl=es",
     contacto: "https://www.ampenlinea.com/",
