@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { Music, Music2, Sparkles } from "lucide-react";
-
+export function CommunityMural() {
+  const [confetti, setConfetti] = useState<WhiteConfettiPiece[]>([]);
+  const [activeStudentId, setActiveStudentId] = useState<string | null>(null);
+  
 interface MuralStudent {
   id: string;
   imageSrc: string;
@@ -244,38 +245,65 @@ export function CommunityMural() {
 
         {/* 4 marcos fotográficos sin fondo extra, alternados sobre el pentagrama */}
         <div className="grid grid-cols-1 items-center gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {MURAL_STUDENTS.map((student) => (
-            <div key={student.id} className={student.staggerClass}>
-              <article
-                className={`${student.floatClass} group relative rounded-lg border border-white bg-white p-2 transition-transform duration-300 hover:z-20 hover:scale-[1.03]`}
-                style={{
-                  boxShadow:
-                    "0 12px 28px rgba(255, 255, 255, 0.95), 0 4px 14px rgba(74, 46, 27, 0.08)",
-                }}
-              >
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm">
-                  <img
-                    src={student.imageSrc}
-                    alt={student.imageAlt}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+          {MURAL_STUDENTS.map((student) => {
+            const isOpen = activeStudentId === student.id;
 
-                  <div className="pointer-events-none absolute inset-x-0 bottom-0 translate-y-full bg-[#3A2314]/88 p-3.5 text-xs leading-relaxed text-[#FAF6EE] opacity-0 backdrop-blur-xs transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    “{student.message}”
+            return (
+              <div key={student.id} className={student.staggerClass}>
+                <article
+                  role="button"
+                  tabIndex={0}
+                  aria-expanded={isOpen}
+                  onClick={() =>
+                    setActiveStudentId((prev) =>
+                      prev === student.id ? null : student.id
+                    )
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActiveStudentId((prev) =>
+                        prev === student.id ? null : student.id
+                      );
+                    }
+                  }}
+                  className={`${student.floatClass} group relative cursor-pointer select-none rounded-lg border border-white bg-white p-2 transition-transform duration-300 hover:z-20 hover:scale-[1.03]`}
+                  style={{
+                    boxShadow:
+                      "0 12px 28px rgba(255, 255, 255, 0.95), 0 4px 14px rgba(74, 46, 27, 0.08)",
+                  }}
+                >
+                  <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm">
+                    <img
+                      src={student.imageSrc}
+                      alt={student.imageAlt}
+                      loading="lazy"
+                      className={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                        isOpen ? "scale-105" : ""
+                      }`}
+                    />
+
+                    <div
+                      className={`pointer-events-none absolute inset-x-0 bottom-0 bg-[#3A2314]/90 p-3.5 text-xs leading-relaxed text-[#FAF6EE] backdrop-blur-xs transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${
+                        isOpen
+                          ? "translate-y-0 opacity-100"
+                          : "translate-y-full opacity-0"
+                      }`}
+                    >
+                      “{student.message}”
+                    </div>
                   </div>
-                </div>
 
-                <div className="pt-2.5 pb-1 text-center">
-                  <p className="font-serif text-sm italic text-[#4A2E1B] sm:text-base">
-                    {student.fullName}, {student.age} años · {student.province}
-                  </p>
-                </div>
-              </article>
-            </div>
-          ))}
+                  <div className="pt-2.5 pb-1 text-center">
+                    <p className="font-serif text-sm italic text-[#4A2E1B] sm:text-base">
+                      {student.fullName}, {student.age} años · {student.province}
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-[#7A4922]/80 lg:hidden">
+                      {isOpen ? "Toca para cerrar" : "Toca para leer mensaje"}
+                    </p>
+                  </div>
+                </article>
+              </div>
+            );
+          })}
         </div>
-      </div>
-    </section>
-  );
-}
