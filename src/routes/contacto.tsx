@@ -80,9 +80,12 @@ function Contacto() {
             <h2 className="text-2xl">Preguntas frecuentes</h2>
             <div className="mt-4 grid gap-2">
               {FAQS.map((f) => (
-                <details key={f.q} className="rounded-md border border-border p-3 text-sm transition-colors hover:border-gold/50">
-                  <summary className="cursor-pointer font-semibold">{f.q}</summary>
-                  <p className="mt-2 text-muted-foreground">{f.a}</p>
+                <details
+                  key={f.id}
+                  className="rounded-md border border-border p-3 text-sm transition-colors hover:border-gold/50"
+                >
+                  <summary className="cursor-pointer font-semibold">{f.pregunta}</summary>
+                  <p className="mt-2 text-muted-foreground">{f.respuesta}</p>
                 </details>
               ))}
             </div>
