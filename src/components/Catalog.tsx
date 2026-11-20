@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { FileText, X } from "lucide-react";
+import { FileText, Lock, MailCheck, ShieldAlert, X } from "lucide-react";
 import {
   RANGOS,
   celloSizeGuides,
@@ -26,6 +26,19 @@ const FAMILIAS = [
 const MODALIDADES = ["Todas", "Venta", "Alquiler", "Donación"] as const;
 const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 
+// 1 o 2 imágenes de muestra por producto (coloca estas imágenes en /public/...)
+const PREVIEW_IMAGES: Record<string, string[]> = {
+  p10: ["/previews/suzuki-violin-1.jpg", "/previews/suzuki-violin-2.jpg"],
+  p11: ["/previews/suzuki-viola-1.jpg", "/previews/suzuki-viola-2.jpg"],
+  p12: ["/previews/metodo-suzuki-1.jpg"],
+  p13: ["/previews/partituras-orquesta-1.jpg", "/previews/partituras-orquesta-2.jpg"],
+};
+
+function esPartituraPorCorreo(producto: Producto): boolean {
+  const texto = `${producto.id} ${producto.titulo} ${producto.descripcion}`.toLowerCase();
+  return texto.includes("partitura") || producto.id === "p13";
+}
+
 function getGuidesForProduct(producto: Producto | null): StringSizeGuide[] | null {
   if (!producto || producto.familia !== "Cuerda") return null;
   if (producto.tipo === "Violín") return violinSizeGuides;
@@ -46,12 +59,50 @@ export function Catalog() {
   const [detalle, setDetalle] = useState<Producto | null>(null);
   const [opcion, setOpcion] = useState("");
   const [pdfAbierto, setPdfAbierto] = useState(false);
+  const [pendienteDonacion, setPendienteDonacion] = useState(false);
+  const [aceptaDonacion, setAceptaDonacion] = useState(false);
+  const [errorDonacion, setErrorDonacion] = useState(false);
 
   const abrirDetalle = (producto: Producto) => {
     setDetalle(producto);
     setOpcion("");
     setPdfAbierto(false);
     setAgregado(false);
+    setPendienteDonacion(false);
+    setAceptaDonacion(false);
+    setErrorDonacion(false);
+  };
+
+  const agregarAlCarritoDirecto = (producto: Producto, opcionElegida: string) => {
+    addToCart({
+      id: producto.id,
+      titulo: producto.titulo,
+      imagen: producto.imagen,
+      modalidad: producto.modalidad,
+      precio: producto.modalidad === "Donación" ? 0 : producto.precio,
+      opcion: opcionElegida,
+    });
+    setAgregado(true);
+    setPendienteDonacion(false);
+  };
+
+  const handleAccionPrincipal = () => {
+    if (!detalle || !opcion || agregado) return;
+    if (detalle.modalidad === "Donación") {
+      setPendienteDonacion(true);
+      setErrorDonacion(false);
+      return;
+    }
+    agregarAlCarritoDirecto(detalle, opcion);
+  };
+
+  const confirmarDonacionYAgregar = () => {
+    if (!detalle || !opcion) return;
+    if (!aceptaDonacion) {
+      setErrorDonacion(true);
+      return;
+    }
+    agregarAlCarritoDirecto(detalle, opcion);
   };
 
   const lista = useMemo(() => {
@@ -76,6 +127,13 @@ export function Catalog() {
       activeGuides.find((g) => g.size === opcion || g.label === opcion) ?? null
     );
   }, [activeGuides, opcion]);
+
+  const previewImgs = useMemo(() => {
+    if (!detalle) return [];
+    const custom = PREVIEW_IMAGES[detalle.id];
+    if (custom && custom.length > 0) return custom.slice(0, 2);
+    return [detalle.imagen];
+  }, [detalle]);
 
   return (
     <div className="shell py-14">
@@ -295,41 +353,170 @@ export function Catalog() {
                 <div className="mt-4">
                   <button
                     type="button"
-                    onClick={() => setPdfAbierto(true)}
+                    onClick={() => setPdfAbierto((v) => !v)}
                     className="btn-outline-gold w-full"
                   >
-                    <FileText className="h-4 w-4" /> Vista previa PDF
+                    <FileText className="h-4 w-4" />{" "}
+                    {pdfAbierto ? "Ocultar vista previa PDF" : "Vista previa PDF"}
                   </button>
+
                   {pdfAbierto && (
-                    <p
+                    <div
                       role="status"
-                      className="mt-2 rounded-md bg-secondary p-3 text-sm"
+                      className="mt-3 space-y-3 rounded-lg border border-border bg-secondary/60 p-3 text-sm"
                     >
-                      Vista previa demostrativa de {detalle.titulo}. El archivo
-                      completo se entregará únicamente con autorización de
-                      derechos.
-                    </p>
+                      <p className="font-medium">
+                        Vista previa ({previewImgs.length}{" "}
+                        {previewImgs.length === 1 ? "página" : "páginas"} de muestra) de{" "}
+                        {detalle.titulo}:
+                      </p>
+
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {previewImgs.map((src, idx) => (
+                          <figure
+                            key={`${src}-${idx}`}
+                            className="overflow-hidden rounded-md border border-border bg-card"
+                          >
+                            <img
+                              src={src}
+                              alt={`Página de muestra ${idx + 1} de ${detalle.titulo}`}
+                              className="h-40 w-full object-cover"
+                            />
+                            <figcaption className="px-2 py-1 text-[0.7rem] text-muted-foreground">
+                              Muestra {idx + 1}
+                            </figcaption>
+                          </figure>
+                        ))}
+                      </div>
+
+                      {detalle.modalidad === "Venta" ? (
+                        <div className="flex items-start gap-2 rounded-md border border-gold/40 bg-card p-2.5 text-xs">
+                          <Lock className="mt-0.5 h-4 w-4 shrink-0 text-gold-deep" />
+                          <p className="text-muted-foreground">
+                            <strong className="text-foreground">Contenido bloqueado:</strong>{" "}
+                            solo se muestra esta vista previa limitada. Para acceder al libro o
+                            archivo completo debes comprarlo y contar con la autorización de
+                            derechos correspondiente.
+                          </p>
+                        </div>
+                      ) : (
+                        <p className="text-xs text-muted-foreground">
+                          Material de donación disponible para consulta educativa; el archivo
+                          completo se entrega sujeto a autorización de derechos y uso responsable.
+                        </p>
+                      )}
+                    </div>
                   )}
+                </div>
+              )}
+
+              {pendienteDonacion && !agregado && (
+                <div className="mt-4 rounded-xl border border-gold/40 bg-secondary/70 p-4 text-sm">
+                  <div className="flex items-start gap-2.5">
+                    {esPartituraPorCorreo(detalle) ? (
+                      <MailCheck className="mt-0.5 h-5 w-5 shrink-0 text-gold-deep" />
+                    ) : (
+                      <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-gold-deep" />
+                    )}
+                    <div className="space-y-2">
+                      <p className="font-semibold">
+                        Condiciones de donación — {detalle.titulo}
+                      </p>
+
+                      {esPartituraPorCorreo(detalle) ? (
+                        <>
+                          <p className="text-xs text-muted-foreground">
+                            Como se trata de partituras enviadas por correo,{" "}
+                            <strong className="text-foreground">
+                              no tienes que ir a ninguna bodega
+                            </strong>{" "}
+                            a retirarlas.
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            Debes usarlas <strong className="text-foreground">para lo que son</strong>{" "}
+                            (estudio y práctica musical) y{" "}
+                            <strong className="text-foreground">
+                              no venderlas, botarlas ni desperdiciarlas
+                            </strong>
+                            .
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-xs text-muted-foreground">
+                            Si eres <strong className="text-foreground">menor de edad</strong>,
+                            debes ir acompañado de tu{" "}
+                            <strong className="text-foreground">
+                              padre, madre o adulto responsable debidamente identificado
+                            </strong>{" "}
+                            para retirar el instrumento en las bodegas.
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            Se firmará un{" "}
+                            <strong className="text-foreground">compromiso sencillo</strong> de que
+                            se usará <strong className="text-foreground">únicamente para estudio</strong>{" "}
+                            y <strong className="text-foreground">no para vender, empeñar</strong> ni
+                            darle mal uso.
+                          </p>
+                        </>
+                      )}
+
+                      <label className="flex cursor-pointer items-start gap-2 pt-1 text-xs">
+                        <input
+                          type="checkbox"
+                          checked={aceptaDonacion}
+                          onChange={(e) => {
+                            setAceptaDonacion(e.target.checked);
+                            if (e.target.checked) setErrorDonacion(false);
+                          }}
+                          className="mt-0.5 h-4 w-4 accent-gold-deep"
+                        />
+                        <span>
+                          {esPartituraPorCorreo(detalle)
+                            ? "Acepto usar estas partituras para estudio y no venderlas, botarlas ni desperdiciarlas."
+                            : "Acepto acudir con un adulto responsable identificado si soy menor de edad para retiro en bodega y firmar el compromiso de uso exclusivo para estudio (sin venta ni empeño)."}
+                        </span>
+                      </label>
+
+                      {errorDonacion && (
+                        <p className="text-xs font-medium text-destructive">
+                          Marca la casilla para continuar y agregar al carrito.
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 pt-1">
+                        <Button
+                          type="button"
+                          variant="gold"
+                          className="h-auto py-1.5 text-xs"
+                          onClick={confirmarDonacionYAgregar}
+                        >
+                          Aceptar y continuar al carrito
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="h-auto py-1.5 text-xs"
+                          onClick={() => {
+                            setPendienteDonacion(false);
+                            setAceptaDonacion(false);
+                            setErrorDonacion(false);
+                          }}
+                        >
+                          Cancelar
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
 
               <div className="mt-6 space-y-3">
                 <Button
                   variant="gold"
-                  disabled={!opcion || agregado}
+                  disabled={!opcion || agregado || pendienteDonacion}
                   className="h-auto w-full whitespace-normal"
-                  onClick={() => {
-                    addToCart({
-                      id: detalle.id,
-                      titulo: detalle.titulo,
-                      imagen: detalle.imagen,
-                      modalidad: detalle.modalidad,
-                      precio:
-                        detalle.modalidad === "Donación" ? 0 : detalle.precio,
-                      opcion,
-                    });
-                    setAgregado(true);
-                  }}
+                  onClick={handleAccionPrincipal}
                 >
                   {agregado
                     ? "Añadido al carrito"
