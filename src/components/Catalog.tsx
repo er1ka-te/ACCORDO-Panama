@@ -28,10 +28,10 @@ const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 
 // 1 o 2 imágenes de muestra por producto (coloca estas imágenes en /public/...)
 const PREVIEW_IMAGES: Record<string, string[]> = {
-  p10: ["/previews/suzuki-violin.png", "/previews/suzuki-violin-2.png"],
-  p11: ["/previews/suzuki-viola-1.png", "/previews/suzuki-viola-2.png"],
-  p12: ["/previews/metodo-suzuki.jpg"],
-  p13: ["/previews/partituras-orquesta.png", "/previews/partituras-orquesta-2.png"],
+  p10: ["/suzuki-violin.png", "/suzuki-violin-2.png"],
+  p11: ["/suzuki-viola-1.png", "/suzuki-viola-2.png"],
+  p12: ["/metodo-suzuki.jpg"],
+  p13: ["/partituras-orquesta.png", "/partituras-orquesta-2.png"],
 };
 
 function esPartituraPorCorreo(producto: Producto): boolean {
