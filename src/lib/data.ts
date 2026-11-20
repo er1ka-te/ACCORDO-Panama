@@ -505,17 +505,225 @@ export type EscuelaItem = {
   especialidad: string;
 };
 
+export type TipoEscuela =
+  | "Fundación"
+  | "Academia pagada"
+  | "Profesor particular";
+
+export type EscuelaItem = {
+  id: string;
+  tipo: TipoEscuela;
+  nombre: string;
+  imagen?: string;
+  perfilDemostrativo?: boolean;
+  ubicacion: string;
+  telefono?: string;
+  sitioWeb?: string;
+  instagram?: string;
+  contacto?: string;
+  maps?: string;
+  enfoque: string;
+  trayectoria?: string;
+  experiencia?: string;
+  modalidadClases?: string;
+  planes: string;
+};
+
+// Guarda los logos en /public/logos/ y las fotos de profesores en /public/profesores/
 export const ESCUELAS: EscuelaItem[] = [
   {
-    id: "esc-1",
-    nombre: "Programa Juvenil de Cuerdas",
-    ubicacion: "Panamá",
-    especialidad: "Violín, viola, violonchelo y práctica orquestal",
+    id: "funsincopa",
+    tipo: "Fundación",
+    nombre: "Fundación Sinfonía Concertante de Panamá (FUNSINCOPA)",
+    imagen: "/logos/funsincopa.png",
+    ubicacion:
+      "Escuela Bilingüe República de Italia, Calle Segunda, Amelia Denis de Icaza, San Miguelito, Panamá.",
+    telefono: "+507 260-0646",
+    sitioWeb: "https://funsincopa.org/",
+    instagram: "https://www.instagram.com/funsincopa/",
+    contacto: "https://funsincopa.org/",
+    maps: "https://www.google.com/maps/search/?api=1&query=San+Miguelito+Panama",
+    enfoque:
+      "Formación orquestal infantil y juvenil en violín, viola, violonchelo, contrabajo, vientos, percusión, lectura musical, conciertos y festivales educativos.",
+    trayectoria:
+      "Fundación sin fines de lucro dedicada a la educación musical integral y la proyección artística de niños y jóvenes en Panamá.",
+    modalidadClases: "Ensayos grupales, talleres formativos y conciertos sinfónicos.",
+    planes:
+      "Programa formativo de fundación sin fines de lucro · Consulta convocatorias e inscripción directa.",
   },
   {
-    id: "esc-2",
-    nombre: "Taller Comunitario de Viento y Percusión",
-    ubicacion: "Panamá",
-    especialidad: "Iniciación musical y ensamble",
+    id: "amp",
+    tipo: "Academia pagada",
+    nombre: "Academia de Música de Panamá (AMP)",
+    imagen: "/logos/amp.png",
+    ubicacion:
+      "San Francisco (Calle 71 Este) y Town Center Costa del Este, Ciudad de Panamá.",
+    telefono: "+(507) 392-2324",
+    sitioWeb: "https://www.ampenlinea.com/",
+    instagram: "https://www.instagram.com/ampenlinea/",
+    contacto: "https://www.ampenlinea.com/",
+    maps: "https://www.google.com/maps/search/?api=1&query=San+Francisco+Panama",
+    enfoque:
+      "Clases prácticas por niveles en guitarra, piano, batería, bajo, canto, violín, formación de bandas, audio y producción musical.",
+    trayectoria:
+      "Academia enfocada en el aprendizaje aplicado, ensambles en vivo y desarrollo escénico para niños, jóvenes y adultos.",
+    modalidadClases: "Clases individuales, bandas y talleres según nivel.",
+    planes:
+      "Costos orientativos: desde aprox. $57.50 hasta $160+ (según planes trimestrales, frecuencia o promociones por sede).",
+  },
+  {
+    id: "la-nota",
+    tipo: "Academia pagada",
+    nombre: "Academia de Música La Nota",
+    imagen: "/logos/la-nota.png",
+    ubicacion:
+      "Sedes en Vía Israel, Paseo Albrook, Los Pueblos y Coronado, Panamá.",
+    telefono: "Contacto directo por teléfono y WhatsApp según sede",
+    sitioWeb: "https://www.academialanota.com/",
+    instagram: "https://www.instagram.com/academialanota/",
+    contacto: "https://www.academialanota.com/",
+    maps: "https://www.google.com/maps/search/?api=1&query=Via+Israel+Panama",
+    enfoque:
+      "Iniciación musical infantil, piano, guitarra, violín, canto, batería, ukelele, lectura de partituras y cursos de verano.",
+    trayectoria:
+      "Red de academias en Panamá con programas por edades y metodologías con respaldo Yamaha en sedes seleccionadas.",
+    modalidadClases: "Clases personalizadas y grupos pequeños.",
+    planes:
+      "Costos orientativos: desde aprox. $57.50 hasta $115+ al mes (varía según sede, edad, modalidad y promoción vigente).",
+  },
+  {
+    id: "instituto-sol",
+    tipo: "Academia pagada",
+    nombre: "Instituto Sol",
+    imagen: "/logos/instituto-sol.png",
+    ubicacion:
+      "Plaza Altos de Panamá, 2° piso, Local L-8A, Condado del Rey, Ciudad de Panamá.",
+    telefono: "6650-8120 / 6203-8221",
+    sitioWeb: "https://institutosolpty.com/",
+    instagram: "https://www.instagram.com/institutosol.pa/",
+    contacto: "https://institutosolpty.com/",
+    maps: "https://www.google.com/maps/search/?api=1&query=Condado+del+Rey+Panama",
+    enfoque:
+      "Currículo musical y artístico estructurado en 4 niveles: piano, guitarra, violín, canto, batería, teoría y presentaciones semestrales.",
+    trayectoria:
+      "Academia centrada en el avance progresivo del estudiante con atención cercana en grupos pequeños y muestras de cierre.",
+    modalidadClases: "Clases individuales y grupos pequeños; opción de primera clase de prueba.",
+    planes:
+      "Costos orientativos: desde $0 (primera clase de prueba) hasta planes mensuales aprox. de $65 a $135 según instrumento y frecuencia.",
+  },
+  {
+    id: "alfaro",
+    tipo: "Academia pagada",
+    nombre: "Academia de Música Alfaro",
+    imagen: "/logos/alfaro.png",
+    ubicacion: "Vía Argentina, Ciudad de Panamá.",
+    telefono: "+507 6799-6164",
+    sitioWeb: "https://academia.cialfaro.com/",
+    instagram: "https://www.instagram.com/academiamusicalalfaro/",
+    contacto: "https://academia.cialfaro.com/",
+    maps: "https://www.google.com/maps/search/?api=1&query=Via+Argentina+Panama",
+    enfoque:
+      "Piano, teclado, guitarra, violín, canto, batería, lectura musical y cursos infantiles de iniciación con Método Yamaha.",
+    trayectoria:
+      "Más de 80 años de tradición musical en Panamá formando generaciones de niños, jóvenes y adultos.",
+    modalidadClases: "Clases individuales y grupales por edades y niveles.",
+    planes:
+      "Costos orientativos: desde aprox. $60 hasta $150+ al mes (según duración de clase, modalidad individual/grupal y programa).",
+  },
+  {
+    id: "sono-arte",
+    tipo: "Academia pagada",
+    nombre: "Sono Arte",
+    imagen: "/logos/sono-arte.png",
+    ubicacion:
+      "Av. Centenario, Edif. Plaza 507, Local Nº 18, Juan Díaz, Ciudad de Panamá.",
+    telefono: "(+507) 397-1736 / (+507) 6414-7036",
+    sitioWeb: "https://sonoartepanama.com/",
+    instagram: "https://www.instagram.com/sonoartepanama/",
+    contacto: "https://sonoartepanama.com/",
+    maps: "https://www.google.com/maps/search/?api=1&query=Juan+Diaz+Panama",
+    enfoque:
+      "Guitarra, piano, canto, violín, batería, bajo eléctrico, solfeo y armonía en sesiones de 60 minutos.",
+    trayectoria:
+      "Más de 20 años formando estudiantes paso a paso con teoría aplicada y recitales de avance.",
+    modalidadClases: "Clases de 1 hora en grupos pequeños o individual, con recuperación de clases.",
+    planes:
+      "Costos orientativos: desde aprox. $65 hasta $140+ al mes (varía según instrumento, horario y cantidad de horas semanales).",
+  },
+  {
+    id: "prof-mateo",
+    tipo: "Profesor particular",
+    nombre: "Mateo Quintero (24 años · Instructor joven)",
+    imagen: "/profesores/profesor-mateo.jpg",
+    perfilDemostrativo: true,
+    ubicacion: "Ciudad de Panamá (presencial y virtual)",
+    telefono: "+507 6000-1101",
+    contacto: "https://wa.me/50760001101",
+    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    enfoque:
+      "Guitarra acústica y eléctrica, ukelele, ritmo y acompañamiento de canciones.",
+    trayectoria:
+      "Egresado de formación musical contemporánea y participante activo en ensambles juveniles en Ciudad de Panamá.",
+    experiencia:
+      "3 años enseñando a principiantes, niños y jóvenes desde cero con repertorio práctico.",
+    modalidadClases: "Clases particulares de 1 hora · Presencial o en línea.",
+    planes: "Cobro por hora: $18 / hora.",
+  },
+  {
+    id: "prof-valeria",
+    tipo: "Profesor particular",
+    nombre: "Valeria Mendoza (31 años · Instructora de cuerdas)",
+    imagen: "/profesores/profesora-valeria.jpg",
+    perfilDemostrativo: true,
+    ubicacion: "Ciudad de Panamá (estudio, domicilio y virtual)",
+    telefono: "+507 6000-2202",
+    contacto: "https://wa.me/50760002202",
+    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    enfoque:
+      "Viola, violín inicial, técnica de arco, afinación, lectura en clave de do y solfeo.",
+    trayectoria:
+      "Integrante de agrupaciones de cámara y orquestas juveniles, especializada en repertorio Suzuki y técnica de cuerdas.",
+    experiencia:
+      "7 años guiando estudiantes desde nivel inicial hasta ingreso a orquestas estudiantiles.",
+    modalidadClases: "Clases personalizadas · Presencial o virtual.",
+    planes: "Cobro por hora: $25 / hora.",
+  },
+  {
+    id: "prof-ricardo",
+    tipo: "Profesor particular",
+    nombre: "Ricardo Paredes (46 años · Maestro con amplia trayectoria)",
+    imagen: "/profesores/profesor-ricardo.jpg",
+    perfilDemostrativo: true,
+    ubicacion: "Ciudad de Panamá (tardes y sábados)",
+    telefono: "+507 6000-3303",
+    contacto: "https://wa.me/50760003303",
+    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    enfoque:
+      "Piano, armonía, lectura de partituras, teoría musical y preparación para audiciones.",
+    trayectoria:
+      "Pianista, arreglista y docente con participación en agrupaciones sinfónicas, bandas y dirección musical en Panamá.",
+    experiencia:
+      "18 años formando estudiantes de distintas edades en técnica pianística y lenguaje musical.",
+    modalidadClases: "Sesiones individuales · Presencial o en línea.",
+    planes: "Cobro por hora: $32 / hora.",
+  },
+  {
+    id: "prof-beatriz",
+    tipo: "Profesor particular",
+    nombre: "Beatriz Saldaña (58 años · Docente decana)",
+    imagen: "/profesores/profesora-beatriz.jpg",
+    perfilDemostrativo: true,
+    ubicacion: "Ciudad de Panamá (sesiones individuales)",
+    telefono: "+507 6000-4404",
+    contacto: "https://wa.me/50760004404",
+    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    enfoque:
+      "Canto, técnica vocal, control respiratorio, proyección escénica y ensamble.",
+    trayectoria:
+      "Más de dos décadas de trayectoria pedagógica y escénica dirigiendo coros y talleres formativos.",
+    experiencia:
+      "25+ años enseñando proyección vocal, afinación, ritmo y seguridad en escenario.",
+    modalidadClases: "Coaching vocal y clases individuales.",
+    planes: "Cobro por hora: $30 / hora.",
   },
 ];
