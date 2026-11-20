@@ -30,8 +30,8 @@ const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 const PREVIEW_IMAGES: Record<string, string[]> = {
   p10: ["/previews/suzuki-violin.png", "/previews/suzuki-violin-2.png"],
   p11: ["/previews/suzuki-viola-1.png", "/previews/suzuki-viola-2.png"],
-  p12: ["/previews/metodo-suzuki-1.jpg"],
-  p13: ["/previews/partituras-orquesta-1.jpg", "/previews/partituras-orquesta-2.jpg"],
+  p12: ["/previews/metodo-suzuki.jpg"],
+  p13: ["/previews/partituras-orquesta.jpg", "/previews/partituras-orquesta-2.jpg"],
 };
 
 function esPartituraPorCorreo(producto: Producto): boolean {
