@@ -535,14 +535,14 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "funsincopa",
     tipo: "Fundación",
     nombre: "Fundación Sinfonía Concertante de Panamá (FUNSINCOPA)",
-    imagen: "/logos/funsincopa.png",
+    imagen: "/funsincopa.jpg",
     ubicacion:
-      "Escuela Bilingüe República de Italia, Calle Segunda, Amelia Denis de Icaza, San Miguelito, Panamá.",
+      "Boulevard El Dorado y Calle Miguel Brostella, Edificio Galerías Colonial, Piso 2, Local 26, Panamá.",
     telefono: "+507 260-0646",
     sitioWeb: "https://funsincopa.org/",
-    instagram: "https://www.instagram.com/funsincopa/",
+    instagram: "https://www.instagram.com/funsincopa_oficial/",
     contacto: "https://funsincopa.org/",
-    maps: "https://www.google.com/maps/search/?api=1&query=San+Miguelito+Panama",
+    maps: "https://maps.app.goo.gl/VUhrRu1KaToxpx4m9",
     enfoque:
       "Formación orquestal infantil y juvenil en violín, viola, violonchelo, contrabajo, vientos, percusión, lectura musical, conciertos y festivales educativos.",
     trayectoria:
@@ -555,14 +555,14 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "amp",
     tipo: "Academia pagada",
     nombre: "Academia de Música de Panamá (AMP)",
-    imagen: "/logos/amp.png",
+    imagen: "/amp.png",
     ubicacion:
       "San Francisco (Calle 71 Este) y Town Center Costa del Este, Ciudad de Panamá.",
     telefono: "+(507) 392-2324",
     sitioWeb: "https://www.ampenlinea.com/",
-    instagram: "https://www.instagram.com/ampenlinea/",
+    instagram: "https://www.instagram.com/ampenlinea/?hl=es",
     contacto: "https://www.ampenlinea.com/",
-    maps: "https://www.google.com/maps/search/?api=1&query=San+Francisco+Panama",
+    maps: "https://maps.app.goo.gl/MyPSFSc21X5YeBsA7",
     enfoque:
       "Clases prácticas por niveles en guitarra, piano, batería, bajo, canto, violín, formación de bandas, audio y producción musical.",
     trayectoria:
@@ -575,14 +575,14 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "la-nota",
     tipo: "Academia pagada",
     nombre: "Academia de Música La Nota",
-    imagen: "/logos/la-nota.png",
+    imagen: "/lanota.jfif",
     ubicacion:
       "Sedes en Vía Israel, Paseo Albrook, Los Pueblos y Coronado, Panamá.",
     telefono: "Contacto directo por teléfono y WhatsApp según sede",
     sitioWeb: "https://www.academialanota.com/",
-    instagram: "https://www.instagram.com/academialanota/",
+    instagram: "https://www.instagram.com/academialanota/?hl=es",
     contacto: "https://www.academialanota.com/",
-    maps: "https://www.google.com/maps/search/?api=1&query=Via+Israel+Panama",
+    maps: "https://maps.app.goo.gl/D5vtNssELwh593HC6",
     enfoque:
       "Iniciación musical infantil, piano, guitarra, violín, canto, batería, ukelele, lectura de partituras y cursos de verano.",
     trayectoria:
@@ -595,14 +595,14 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "instituto-sol",
     tipo: "Academia pagada",
     nombre: "Instituto Sol",
-    imagen: "/logos/instituto-sol.png",
+    imagen: "/sol.jfif",
     ubicacion:
       "Plaza Altos de Panamá, 2° piso, Local L-8A, Condado del Rey, Ciudad de Panamá.",
     telefono: "6650-8120 / 6203-8221",
     sitioWeb: "https://institutosolpty.com/",
-    instagram: "https://www.instagram.com/institutosol.pa/",
+    instagram: "https://www.instagram.com/institutosol.pa/?hl=es-la",
     contacto: "https://institutosolpty.com/",
-    maps: "https://www.google.com/maps/search/?api=1&query=Condado+del+Rey+Panama",
+    maps: "https://maps.app.goo.gl/yqViVs8AsGCWQUGw8",
     enfoque:
       "Currículo musical y artístico estructurado en 4 niveles: piano, guitarra, violín, canto, batería, teoría y presentaciones semestrales.",
     trayectoria:
@@ -615,13 +615,13 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "alfaro",
     tipo: "Academia pagada",
     nombre: "Academia de Música Alfaro",
-    imagen: "/logos/alfaro.png",
+    imagen: "/alfaro.png",
     ubicacion: "Vía Argentina, Ciudad de Panamá.",
     telefono: "+507 6799-6164",
     sitioWeb: "https://academia.cialfaro.com/",
-    instagram: "https://www.instagram.com/academiamusicalalfaro/",
+    instagram: "https://www.instagram.com/cialfaroacademia/",
     contacto: "https://academia.cialfaro.com/",
-    maps: "https://www.google.com/maps/search/?api=1&query=Via+Argentina+Panama",
+    maps: "https://maps.app.goo.gl/E1egtf2Prk37vTjD7",
     enfoque:
       "Piano, teclado, guitarra, violín, canto, batería, lectura musical y cursos infantiles de iniciación con Método Yamaha.",
     trayectoria:
@@ -634,14 +634,14 @@ export const ESCUELAS: EscuelaItem[] = [
     id: "sono-arte",
     tipo: "Academia pagada",
     nombre: "Sono Arte",
-    imagen: "/logos/sono-arte.png",
+    imagen: "/sono.jpg",
     ubicacion:
       "Av. Centenario, Edif. Plaza 507, Local Nº 18, Juan Díaz, Ciudad de Panamá.",
-    telefono: "(+507) 397-1736 / (+507) 6414-7036",
+    telefono: "+507 6414-7036",
     sitioWeb: "https://sonoartepanama.com/",
-    instagram: "https://www.instagram.com/sonoartepanama/",
+    instagram: "https://www.instagram.com/sonoartepty/",
     contacto: "https://sonoartepanama.com/",
-    maps: "https://www.google.com/maps/search/?api=1&query=Juan+Diaz+Panama",
+    maps: "https://maps.app.goo.gl/RPWEfB2KqHBbPeHX6",
     enfoque:
       "Guitarra, piano, canto, violín, batería, bajo eléctrico, solfeo y armonía en sesiones de 60 minutos.",
     trayectoria:
@@ -653,13 +653,11 @@ export const ESCUELAS: EscuelaItem[] = [
   {
     id: "prof-mateo",
     tipo: "Profesor particular",
-    nombre: "Mateo Quintero (24 años · Instructor joven)",
-    imagen: "/profesores/profesor-mateo.jpg",
+    nombre: "Mateo Quintero (24 años)",
+    imagen: "/mateo.jpg",
     perfilDemostrativo: true,
     ubicacion: "Ciudad de Panamá (presencial y virtual)",
-    telefono: "+507 6000-1101",
-    contacto: "https://wa.me/50760001101",
-    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    telefono: "+507 6070-1101",
     enfoque:
       "Guitarra acústica y eléctrica, ukelele, ritmo y acompañamiento de canciones.",
     trayectoria:
@@ -672,13 +670,11 @@ export const ESCUELAS: EscuelaItem[] = [
   {
     id: "prof-valeria",
     tipo: "Profesor particular",
-    nombre: "Valeria Mendoza (31 años · Instructora de cuerdas)",
-    imagen: "/profesores/profesora-valeria.jpg",
+    nombre: "Valeria Mendoza (31 años)",
+    imagen: "/valeria.jfif",
     perfilDemostrativo: true,
     ubicacion: "Ciudad de Panamá (estudio, domicilio y virtual)",
-    telefono: "+507 6000-2202",
-    contacto: "https://wa.me/50760002202",
-    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    telefono: "+507 6233-2202",
     enfoque:
       "Viola, violín inicial, técnica de arco, afinación, lectura en clave de do y solfeo.",
     trayectoria:
@@ -691,13 +687,11 @@ export const ESCUELAS: EscuelaItem[] = [
   {
     id: "prof-ricardo",
     tipo: "Profesor particular",
-    nombre: "Ricardo Paredes (46 años · Maestro con amplia trayectoria)",
-    imagen: "/profesores/profesor-ricardo.jpg",
+    nombre: "Ricardo Paredes (46 años)",
+    imagen: "/ricardo.jpg",
     perfilDemostrativo: true,
     ubicacion: "Ciudad de Panamá (tardes y sábados)",
-    telefono: "+507 6000-3303",
-    contacto: "https://wa.me/50760003303",
-    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    telefono: "+507 6105-3303",
     enfoque:
       "Piano, armonía, lectura de partituras, teoría musical y preparación para audiciones.",
     trayectoria:
@@ -710,13 +704,11 @@ export const ESCUELAS: EscuelaItem[] = [
   {
     id: "prof-beatriz",
     tipo: "Profesor particular",
-    nombre: "Beatriz Saldaña (58 años · Docente decana)",
-    imagen: "/profesores/profesora-beatriz.jpg",
+    nombre: "Beatriz Saldaña (58 años)",
+    imagen: "/beatriz.jpg",
     perfilDemostrativo: true,
     ubicacion: "Ciudad de Panamá (sesiones individuales)",
-    telefono: "+507 6000-4404",
-    contacto: "https://wa.me/50760004404",
-    maps: "https://www.google.com/maps/search/?api=1&query=Ciudad+de+Panama",
+    telefono: "+507 6878-4404",
     enfoque:
       "Canto, técnica vocal, control respiratorio, proyección escénica y ensamble.",
     trayectoria:
