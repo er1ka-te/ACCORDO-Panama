@@ -1,7 +1,6 @@
-export function CommunityMural() {
-  const [confetti, setConfetti] = useState<WhiteConfettiPiece[]>([]);
-  const [activeStudentId, setActiveStudentId] = useState<string | null>(null);
-  
+import { useState } from "react";
+import { Music, Music2, Sparkles } from "lucide-react";
+
 interface MuralStudent {
   id: string;
   imageSrc: string;
@@ -75,6 +74,7 @@ const MURAL_STUDENTS: MuralStudent[] = [
 
 export function CommunityMural() {
   const [confetti, setConfetti] = useState<WhiteConfettiPiece[]>([]);
+  const [activeStudentId, setActiveStudentId] = useState<string | null>(null);
 
   const handleConfetti = () => {
     const batchId = Date.now();
@@ -307,3 +307,7 @@ export function CommunityMural() {
             );
           })}
         </div>
+      </div>
+    </section>
+  );
+}
