@@ -31,7 +31,7 @@ const PREVIEW_IMAGES: Record<string, string[]> = {
   p10: ["/previews/suzuki-violin.png", "/previews/suzuki-violin-2.png"],
   p11: ["/previews/suzuki-viola-1.png", "/previews/suzuki-viola-2.png"],
   p12: ["/previews/metodo-suzuki.jpg"],
-  p13: ["/previews/partituras-orquesta.jpg", "/previews/partituras-orquesta-2.jpg"],
+  p13: ["/previews/partituras-orquesta.png", "/previews/partituras-orquesta-2.png"],
 };
 
 function esPartituraPorCorreo(producto: Producto): boolean {
