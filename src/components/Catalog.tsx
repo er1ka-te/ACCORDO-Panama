@@ -29,7 +29,7 @@ const FORMATOS = ["Todos", "Físico", "Digital"] as const;
 // 1 o 2 imágenes de muestra por producto (coloca estas imágenes en /public/...)
 const PREVIEW_IMAGES: Record<string, string[]> = {
   p10: ["/previews/suzuki-violin.png", "/previews/suzuki-violin-2.png"],
-  p11: ["/previews/suzuki-viola-1.jpg", "/previews/suzuki-viola-2.jpg"],
+  p11: ["/previews/suzuki-viola-1.png", "/previews/suzuki-viola-2.png"],
   p12: ["/previews/metodo-suzuki-1.jpg"],
   p13: ["/previews/partituras-orquesta-1.jpg", "/previews/partituras-orquesta-2.jpg"],
 };
